@@ -1,0 +1,589 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
+
+/*Defaults*/
+html {
+    -webkit-font-smoothing: antialiased!important;
+    -moz-osx-font-smoothing: grayscale!important;
+    -ms-font-smoothing: antialiased!important;
+}
+
+body {
+    font-family: 'Inconsolata', monospace;
+    font-size:15px;
+    width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Inconsolata', monospace;
+    font-weight: 700;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+section {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+section:nth-child(odd) {
+    background-color: #fafbfc;
+}
+
+.container {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+p {
+    line-height: 140%;
+}
+
+/*Mixins*/
+.bg-color-white {
+    background-color: white;
+}
+
+.margin-tb-1 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.naira {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.display-flex-row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.z-0 {
+    z-index: 0;
+}
+
+.z-1 {
+    z-index: 1;
+}
+
+.text-muted {
+    color: #6a737d;
+}
+
+.padding-lr-1 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.small-text {
+    font-size: small;
+}
+
+.margin-b-1 {
+    margin-bottom: 1em;
+}
+
+.margin-b-2 {
+    margin-bottom: 2em;
+}
+
+.margin-t-1 {
+    margin-top: 1em;
+}
+
+.margin-t-2 {
+    margin-top: 2em;
+}
+
+.margin-t-4 {
+    margin-top: 4em;
+}
+
+.list-unstyled {
+    list-style: none;
+}
+
+/*Features*/
+
+/*Animations*/
+.rotate {
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
+}
+.rotate:hover {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+.zoom {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    transition: all ease 500ms;
+}
+
+.zoom:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: all ease 500ms;
+}
+
+.footer {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: .8rem;
+}
+
+#header-bg {
+    position: relative;
+    padding-top: 3rem;
+    padding-bottom: .5em;
+    min-height: 450px;
+    background: url('../img/bg/undraw_transfer_money_rywa.svg') no-repeat right center scroll, linear-gradient(#46c75e, #2F2E41);
+    -webkit-background-size: 60%;
+    -moz-background-size: 60%;
+    -o-background-size: 60%;
+    background-size: 60%;
+    box-shadow: 0 1px 3px rgba(180, 180, 180, 0.12), 0 1px 2px rgba(168, 168, 168, 0.24);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#header-bg > h1 {
+    font-weight: 700;
+}
+
+#inner-header-contents {
+    max-width: 35rem;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: .8em;
+    font-weight: 700;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 3px;
+    transition: .2s;
+    box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+    font-family: inherit;
+}
+
+.navbar {
+    font-size: 14px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    padding: 1em;
+}
+
+.feature-image {
+    max-width: 200px;
+}
+
+.main-nav {
+    list-style-type: none;
+    display: none;
+}
+
+.nav-links {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 700;
+}
+
+.main-nav li {
+    text-align: center;
+    margin: 15px auto;
+}
+
+.logo > img {
+    height: 40px;
+}
+
+.navbar-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 24px;
+}
+
+.active {
+    display: block;
+}
+
+/*Responsive props*/
+@media screen and (min-width: 768px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .main-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .main-nav li {
+        margin: 0;
+    }
+
+    .nav-links {
+        margin-left: 40px;
+        color: #000000;
+        font-weight: 700;
+    }
+
+    .logo {
+        margin-top: 0;
+    }
+
+    .navbar-toggle {
+        display: none;
+    }
+
+    .logo:hover,
+    .nav-links:hover {
+        color: #0AC97E;
+    }
+
+    .container {
+        padding-right: 5rem;
+        padding-left: 5rem;
+    }
+
+    section {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+
+    .feature-image {
+        max-width: 350px;
+    }
+
+    .footer {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        font-size: .9rem;
+    }
+
+    .bg-light {
+        background-color: #fafbfc;
+    }
+
+    .color-black {
+        color: #000;
+    }
+
+    #header-bg {
+        position: relative;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        min-height: 600px;
+        background: url('../img/bg/undraw_transfer_money_rywa.svg')  no-repeat right center scroll, linear-gradient(#46c75e, #2F2E41);
+        -webkit-background-size: 60%;
+        -moz-background-size: 60%;
+        -o-background-size: 60%;
+        background-size: 60%;
+    }
+
+    .button {
+        border: none;
+        display: inline-block;
+        padding: 16px 30px;
+        font-size: .9em;
+        font-weight: 700;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        user-select: none;
+        border-radius: 3px;
+        transition: .2s;
+        box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+        font-family: inherit;
+    }
+}
+
+.nav-button {
+    padding: .5em 1em;
+}
+
+.primary-button {
+    color: white;
+    background-color: #0AC97E;
+    border: 2px solid #0AC97E;
+}
+
+.primary-button:hover {
+    background-color: #0a915b;
+    border: 2px solid #0a915b;
+    transition: 200ms;
+}
+
+.primary-outline-button {
+    color: #0AC97E;
+    background-color: transparent;
+    border: 2px solid #0AC97E;
+}
+
+.primary-outline-button:hover {
+    color: #FFFFFF;
+    background-color: #0AC97E;
+    border: 2px solid #0AC97E;
+    transition: 200ms;
+}
+
+.box-shadow {
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.05);
+}
+
+.primary-bg-color {
+    background-color: #0AC97E;
+}
+
+.primary-color {
+    color: #0AC97E;
+}
+
+#quick-text {
+    background-color: #38D39F;
+    padding: .1em;
+    font-weight: 700;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}
+
+
+/*Testimonials*/
+figure.figure {
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    min-width: 220px;
+    max-width: 310px;
+    width: 100%;
+    color: #333;
+    text-align: left;
+    box-shadow: none;
+}
+
+figure.figure img {
+    max-width: 100%;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    display: inline-block;
+    z-index: 1;
+    position: relative;
+}
+figure.figure blockquote {
+    display: block;
+    border-radius: 8px;
+    position: relative;
+    background-color: #fafafa;
+    padding: 30px 50px 65px 50px;
+    font-size: 0.8em;
+    font-weight: 500;
+    margin: 0 0 -50px;
+    line-height: 1.6em;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+figure.figure blockquote:before,
+figure.figure blockquote:after {
+    font-family: 'FontAwesome';
+    position: absolute;
+    font-size: 50px;
+    opacity: 0.3;
+    font-style: normal;
+}
+figure.figure blockquote:before {
+    content: "\201C";
+    top: 35px;
+    left: 20px;
+}
+figure.figure blockquote:after {
+    content: "\201D";
+    right: 20px;
+    bottom: 35px;
+}
+figure.figure .author {
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+    color: #ffffff;
+}
+figure.figure .author h5 {
+    opacity: 0.8;
+    margin: 0;
+    font-weight: 800;
+    color: #000;
+}
+figure.figure .author h5 span {
+    font-weight: 400;
+    text-transform: none;
+    display: block;
+    color: #000;
+}
+
+/*steps*/
+.md-stepper-horizontal {
+    display:table;
+    width:100%;
+    margin:0 auto;
+}
+.md-stepper-horizontal .md-step {
+    display:table-cell;
+    position:relative;
+    padding:24px;
+}
+
+.md-stepper-horizontal .md-step:first-child .md-step-bar-left,
+.md-stepper-horizontal .md-step:last-child .md-step-bar-right {
+    display:none;
+}
+.md-stepper-horizontal .md-step .md-step-circle {
+    width:30px;
+    height:30px;
+    margin:0 auto;
+    border-radius: 50%;
+    text-align: center;
+    line-height:30px;
+    font-size: 16px;
+    font-weight: 700;
+    color:#FFFFFF;
+}
+
+.md-stepper-horizontal .md-step.active .md-step-circle {
+    background-color: #0AC97E;
+}
+
+.md-stepper-horizontal .md-step .md-step-title {
+    margin-top:16px;
+    font-size:16px;
+    font-weight:700;
+}
+
+.md-stepper-horizontal .md-step.active .md-step-title {
+    font-weight: 700;
+    color: rgba(0,0,0,.87);
+}
+
+.md-stepper-horizontal .md-step .md-step-optional {
+    font-size: 13px;
+}
+.md-stepper-horizontal .md-step.active .md-step-optional {
+    color: rgba(0,0,0,.54);
+}
+.md-stepper-horizontal .md-step .md-step-bar-left,
+.md-stepper-horizontal .md-step .md-step-bar-right {
+    position:absolute;
+    top:36px;
+    height:1px;
+    border-top:1px solid #DDDDDD;
+}
+.md-stepper-horizontal .md-step .md-step-bar-right {
+    right:0;
+    left:50%;
+    margin-left:20px;
+}
+.md-stepper-horizontal .md-step .md-step-bar-left {
+    left:0;
+    right:50%;
+    margin-right:20px;
+}
+
+#quick-credit-span {
+    text-decoration: underline;
+    color: black;
+}
+
+#quick-credit-span:hover {
+    color: #0AC97E;
+}
+
+#delay-span {
+    text-decoration: line-through;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.primary-hover:hover {
+    color: #0AC97E;
+}
+
+#footer-menu {
+    display: flex;
+    justify-content: space-between;
+    flex: auto;
+    flex-wrap: wrap;
+}
+
+#footer-logo-div {
+    flex: 6;
+}
+
+#footer-menu > li a {
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+}
+
+#footer-menu > li a:hover {
+    color: #0AC97E;
+}
+/*Go up button*/
+#goUp {
+    display: none;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 99;
+    background-color: #0AC97E;
+    color: white;
+    cursor: pointer;
+    padding: 1.1rem;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    width: 3rem;
+    height: 3rem;
+}
+
+#goUp:hover #goUp:focus {
+    background-color: #0a915b;
+}
