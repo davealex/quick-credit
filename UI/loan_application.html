@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An online lending platform that provides short term soft loans to individuals">
+    <meta name="author" content="Quick Credit">
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Loan Application | An online lending platform that provides short term soft loans to individuals</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar">
+    <span class="navbar-toggle" id="js-navbar-toggle">
+        <i class="fas fa-bars primary-color"></i>
+    </span>
+
+    <a href="#" class="logo"><img src="img/quick_cash_logo.png" alt="Quick Cash logo"></a>
+    <ul class="main-nav" id="js-menu">
+        <li>
+            <a href="#" class="nav-links"><i class="fas fa-check-circle zoom primary-color" title="verified"></i> John Doe <i class="fas fa-caret-down"></i></a>
+        </li>
+
+        <li>
+            <a href="#" class="nav-links" title="Need help?"><i class="far fa-question-circle rotate"></i></a>
+        </li>
+    </ul>
+</nav>
+
+<header class="user-header-bg">
+    <div class="container align-center">
+        <img class="margin-t-4  zoom" src="img/bg/undraw_savings_hjfl.svg" alt="user-page-photo">
+        <h2>Quick Credit</h2>
+        <p>Application</p>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div><a href="#" class="no-underline">Profile</a> > Apply</div>
+
+        <div class="display-flex-row">
+            <div class="align-center">
+                <div>
+                    <i class="fa-2x fas fa-pen-fancy primary-color rotate"></i>
+                </div>
+                <h3 class="margin-t-1 margin-b-1">Loan Application Slip</h3>
+                <hr>
+                <div class="margin-t-2 form-card">
+                    <div class="padding-lr-1 align-left">
+                        <form action="#">
+                            <label for="amount"><b>Amount in <span class="naira">&#8358;</span></b></label>
+                            <input type="number" placeholder="Enter amount" id="amount" name="amount" min="0" required>
+
+                            <label for="tenor"><b>Loan Tenor (months)</b></label>
+                            <select name="tenor" id="tenor" required>
+                                <option value="">Select a loan tenor</option>
+                                <option value="1">1 month</option>
+                                <option value="2">2 months</option>
+                                <option value="3">3 months</option>
+                                <option value="4">4 months</option>
+                                <option value="5">5 months</option>
+                                <option value="6">6 months</option>
+                                <option value="7">7 months</option>
+                                <option value="8">8 months</option>
+                                <option value="9">9 months</option>
+                                <option value="10">10 months</option>
+                                <option value="11">11 months</option>
+                                <option value="12">12 months</option>
+                            </select>
+
+                            <div class="margin-tb-1">
+                                <div class="checkbox">
+                                    <input type="checkbox" checked="checked" id="agreement">
+                                    <label for="agreement">I agree to the <a href="#">Privacy & Terms</a></label>
+                                </div>
+                            </div>
+
+                            <a href="#"><button type="submit" class="button primary-outline-button submit-form">Apply</button></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="display-flex-row">
+            <div id="footer-logo-div">
+                <a href="#"><img class="rotate" src="img/quick_cash_outline_logo.png" alt="quick cash outline logo"></a>
+            </div>
+
+            <ul class="list-unstyled" id="footer-menu">
+                <li>
+                    <a href="#">Help</a>
+                </li>
+                <li>
+                    <a href="#">Documentation</a>
+                </li>
+                <li>
+                    <a href="#">Privacy & Terms</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="align-center margin-t-1">
+            <ul class="list-unstyled">
+                <li class="text-muted">info@quickcredit.com</li>
+                <li class="text-muted">support@quickcredit.com</li>
+            </ul>
+
+            <p class="margin-t-1 text-muted">&copy; <a href="#" class="color-black primary-hover-color">Quick Credit</a>
+                <script>document.write(new Date().getFullYear())</script>. All Rights Reserved
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/common.js"></script>
+<script src="js/scripts.js"></script>
+
+</body>
+</html>
