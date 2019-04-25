@@ -689,3 +689,18 @@ span.forgot-password {
     -o-background-size: 60%;
     background-size: 60%;
 }
+
+/*user home*/
+.user-header-bg {
+    position: relative;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-header-bg img {
+    max-width: 20rem;
+}
