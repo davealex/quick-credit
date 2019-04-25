@@ -827,3 +827,30 @@ table th {
     padding: .2rem;
     font-size: small;
 }
+
+/*Approve or Reject Loan*/
+.red-btn {
+    background-color: red;
+    border-color: red;
+}
+
+.red-btn:hover {
+    background-color: #ab0000;
+    border-color: #ab0000;
+}
+
+.blue-btn {
+    background-color: #186dc3;
+    border-color: #186dc3;
+}
+
+.blue-btn:hover {
+    background-color: #144989;
+    border-color: #144989;
+}
+
+/*Post Repayment*/
+.margin-rl-auto {
+    margin-right: auto;
+    margin-left: auto;
+}
