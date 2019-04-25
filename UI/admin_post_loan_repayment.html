@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An online lending platform that provides short term soft loans to individuals">
+    <meta name="author" content="Quick Credit">
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Post Loan Repayment | An online lending platform that provides short term soft loans to individuals</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar">
+    <span class="navbar-toggle" id="js-navbar-toggle">
+        <i class="fas fa-bars primary-color"></i>
+    </span>
+
+    <a href="#" class="logo"><img src="img/quick_cash_logo.png" alt="Quick Cash logo"></a>
+    <ul class="main-nav" id="js-menu">
+        <li>
+            <a href="#" class="nav-links">
+                <i class="fas fa-check-circle zoom primary-color" title="verified"></i>
+                John Doe <span class="small-text primary-color">- Admin</span>
+                <i class="fas fa-caret-down"></i>
+            </a>
+        </li>
+
+        <li>
+            <a href="#" class="nav-links" title="Need help?"><i class="far fa-question-circle rotate"></i></a>
+        </li>
+    </ul>
+</nav>
+
+<header class="user-header-bg">
+    <div class="container align-center">
+        <img class="margin-t-4  zoom" src="img/bg/undraw_agreement_aajr.svg" alt="post-loan-repayment-photo">
+        <h2 class="margin-t-1">Loan Repayment</h2>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div><a href="#" class="no-underline">Dashboard</a> > <a href="#" class="no-underline">Loans</a> > <a href="#" class="no-underline">Current</a> > Repayment</div>
+
+        <div class="display-flex-row margin-t-2">
+            <div class="align-center">
+                <div>
+                    <i class="fa-2x fas fa-credit-card primary-color rotate"></i>
+                </div>
+                <h3 class="margin-t-1 margin-b-1">Loan Repayment Slip</h3>
+                <hr>
+                <p class="margin-t-1 small-text">
+                    <em>Loan Ref: #767817 | Loan Value: <span class="naira">&#8358;</span>5,000 | Issued on: 31/12/2018 | Tenor: 3 months | Interest rate: 5% | Status: not fully paid | Due Date: 01/04/2019</em>
+                </p>
+
+                <div class="margin-t-2 form-card align-center margin-rl-auto">
+                    <div class="padding-lr-1 align-left">
+                        <form action="#">
+                            <label for="user"><b>User Id</b></label>
+                            <input type="number" placeholder="Enter User Id" id="user" name="user" min="1" required>
+
+                            <label for="loanId"><b>Loan Id</b></label>
+                            <input type="number" placeholder="Enter Loan Id" id="loanId" name="loanId" min="1" required>
+
+                            <label for="amount"><b>Amount in <span class="naira">&#8358;</span></b></label>
+                            <input type="number" placeholder="Enter amount" id="amount" name="amount" min="0" required>
+
+                            <a href="#"><button type="submit" class="button primary-outline-button submit-form">Post <i class="fas fa-credit-card"></i></button></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="display-flex-row">
+            <div id="footer-logo-div">
+                <a href="#"><img class="rotate" src="img/quick_cash_outline_logo.png" alt="quick cash outline logo"></a>
+            </div>
+
+            <ul class="list-unstyled" id="footer-menu">
+                <li>
+                    <a href="#">Help</a>
+                </li>
+                <li>
+                    <a href="#">Documentation</a>
+                </li>
+                <li>
+                    <a href="#">Privacy & Terms</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="align-center margin-t-1">
+            <ul class="list-unstyled">
+                <li class="text-muted">info@quickcredit.com</li>
+                <li class="text-muted">support@quickcredit.com</li>
+            </ul>
+
+            <p class="margin-t-1 text-muted">&copy; <a href="#" class="color-black primary-hover-color">Quick Credit</a>
+                <script>document.write(new Date().getFullYear())</script>. All Rights Reserved
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/common.js"></script>
+</body>
+</html>
