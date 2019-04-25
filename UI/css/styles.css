@@ -587,3 +587,73 @@ figure.figure .author h5 span {
 #goUp:hover #goUp:focus {
     background-color: #0a915b;
 }
+
+/*Forms*/
+input[type=text], input[type=password], input[type=number], input[type=email], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    font-family: inherit ;
+}
+
+button.submit-form {
+    margin: 8px 0;
+    width: 100%;
+    padding: 12px 20px;
+}
+
+button.submit-form:hover {
+    opacity: 0.8;
+}
+
+.img-container {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+span.forgot-password {
+    float: right;
+    padding-top: 16px;
+    font-size: .9rem;
+}
+
+.checkbox {
+    margin: auto;
+}
+
+.checkbox input {
+    padding: 1rem;
+}
+
+@media screen and (max-width: 300px) {
+    span.forgot-password {
+        display: block;
+        float: none;
+    }
+}
+
+.form-card {
+    padding: 40px 0;
+    max-width: 350px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.form-card:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+/*Image backgrounds*/
+#signup-section-bg {
+    background: url('../img/bg/undraw_profile_data_mk6k.svg') repeat-x center center fixed;
+    -webkit-background-size: 45%;
+    -moz-background-size: 45%;
+    -o-background-size: 45%;
+    background-size: 45%;
+}
