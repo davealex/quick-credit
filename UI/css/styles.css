@@ -782,3 +782,48 @@ table th {
         border-bottom: 0;
     }
 }
+
+/*Admin Dashbaord*/
+#admin-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#admin-dashboard-sub-row {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#admin-dashboard-sub-col {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 20px;
+    align-items: stretch;
+}
+
+.card {
+    padding: 30px 0;
+    width: auto;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.small-btn {
+    padding: .2rem;
+    font-size: small;
+}
