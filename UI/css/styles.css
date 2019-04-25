@@ -673,3 +673,19 @@ span.forgot-password {
     -o-background-size: 45%;
     background-size: 45%;
 }
+
+#forgot-password-section-bg {
+    background: url('../img/bg/undraw_in_thought_gjsf.svg') repeat-x center center fixed;
+    -webkit-background-size: 45%;
+    -moz-background-size: 45%;
+    -o-background-size: 45%;
+    background-size: 45%;
+}
+
+#reset-password-section-bg {
+    background: url('../img/bg/undraw_my_password_d6kg.svg') no-repeat center center fixed;
+    -webkit-background-size: 60%;
+    -moz-background-size: 60%;
+    -o-background-size: 60%;
+    background-size: 60%;
+}
