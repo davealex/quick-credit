@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An online lending platform that provides short term soft loans to individuals">
+    <meta name="author" content="Quick Credit">
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Current Loans | An online lending platform that provides short term soft loans to individuals</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar">
+    <span class="navbar-toggle" id="js-navbar-toggle">
+        <i class="fas fa-bars primary-color"></i>
+    </span>
+
+    <a href="#" class="logo"><img src="img/quick_cash_logo.png" alt="Quick Cash logo"></a>
+    <ul class="main-nav" id="js-menu">
+        <li>
+            <a href="#" class="nav-links">
+                <i class="fas fa-check-circle zoom primary-color" title="verified"></i>
+                John Doe <span class="small-text primary-color">- Admin</span>
+                <i class="fas fa-caret-down"></i>
+            </a>
+        </li>
+
+        <li>
+            <a href="#" class="nav-links" title="Need help?"><i class="far fa-question-circle rotate"></i></a>
+        </li>
+    </ul>
+</nav>
+
+<header class="user-header-bg">
+    <div class="container align-center">
+        <img class="margin-t-4  zoom" src="img/bg/undraw_savings_hjfl.svg" alt="user-page-photo">
+        <h2 class="margin-t-1">Current Loans</h2>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div><a href="#" class="no-underline">Dashboard</a> > <a href="#" class="no-underline">Loans</a> > Current</div>
+
+        <div class="display-flex-row">
+            <div>
+                <div class="align-center margin-t-2">
+                    <div>
+                        <i class="fas fa-wallet primary-color rotate"></i>
+                    </div>
+                    <h3 class="margin-t-1 margin-b-1">Current Loans (Not fully repaid)</h3>
+                    <input type="text" id="myInput" onkeyup="filterTable()" placeholder="Search for emails..">
+                </div>
+
+                <div class="table margin-t-1 align-left">
+                    <table id="myTable">
+                        <thead>
+                        <tr>
+                            <th scope="col" width="30">Id</th>
+                            <th scope="col" width="150">Email</th>
+                            <th scope="col">Amount (<span class="naira">&#8358;</span>)</th>
+                            <th scope="col">Date Approved</th>
+                            <th scope="col">Date Due</th>
+                            <th scope="col">Repaid</th>
+                            <th scope="col">Tenor(months)</th>
+                            <th scope="col">Installment (<span class="naira">&#8358;</span>)</th>
+                            <th scope="col">Balance (<span class="naira">&#8358;</span>)</th>
+                            <th scope="col">Interest</th>
+                            <th scope="col">Repayment</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td data-label="Id">1</td>
+                            <td data-label="Email">jpl@email.com</td>
+                            <td data-label="Amount (&#8358;)">3,500.00</td>
+                            <td data-label="Date Approved">01/03/2019</td>
+                            <td data-label="Date Due">01/03/2019</td>
+                            <td data-label="Repaid">false</td>
+                            <td data-label="Tenor">3</td>
+                            <td data-label="Installment">1,225.00</td>
+                            <td data-label="Balance">3,500.00</td>
+                            <td data-label="Interest">5%</td>
+                            <td data-label="Repayment">
+                                <a href="#"><button class="button primary-button small-btn">Repayment <i class="fas fa-credit-card"></i></button></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Id">2</td>
+                            <td data-label="Email">usa@email.com</td>
+                            <td data-label="Amount (&#8358;)">3,500.00</td>
+                            <td data-label="Date Approved">01/03/2019</td>
+                            <td data-label="Date Due">01/03/2019</td>
+                            <td data-label="Repaid">false</td>
+                            <td data-label="Tenor">3</td>
+                            <td data-label="Installment">1,225.00</td>
+                            <td data-label="Balance">3,500.00</td>
+                            <td data-label="Interest">5%</td>
+                            <td data-label="Repayment">
+                                <a href="#"><button class="button primary-button small-btn">Repayment <i class="fas fa-credit-card"></i></button></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Id">3</td>
+                            <td data-label="Email">japan@email.com</td>
+                            <td data-label="Amount (&#8358;)">3,500.00</td>
+                            <td data-label="Date Approved">01/03/2019</td>
+                            <td data-label="Date Due">01/03/2019</td>
+                            <td data-label="Repaid">false</td>
+                            <td data-label="Tenor">3</td>
+                            <td data-label="Installment">1,225.00</td>
+                            <td data-label="Balance">3,500.00</td>
+                            <td data-label="Interest">5%</td>
+                            <td data-label="Repayment">
+                                <a href="#"><button class="button primary-button small-btn">Repayment <i class="fas fa-credit-card"></i></button></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="display-flex-row">
+            <div id="footer-logo-div">
+                <a href="#"><img class="rotate" src="img/quick_cash_outline_logo.png" alt="quick cash outline logo"></a>
+            </div>
+
+            <ul class="list-unstyled" id="footer-menu">
+                <li>
+                    <a href="#">Help</a>
+                </li>
+                <li>
+                    <a href="#">Documentation</a>
+                </li>
+                <li>
+                    <a href="#">Privacy & Terms</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="align-center margin-t-1">
+            <ul class="list-unstyled">
+                <li class="text-muted">info@quickcredit.com</li>
+                <li class="text-muted">support@quickcredit.com</li>
+            </ul>
+
+            <p class="margin-t-1 text-muted">&copy; <a href="#" class="color-black primary-hover-color">Quick Credit</a>
+                <script>document.write(new Date().getFullYear())</script>. All Rights Reserved
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/common.js"></script>
+<script src="js/table_filter.js"></script>
+</body>
+</html>
