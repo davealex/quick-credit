@@ -650,8 +650,24 @@ span.forgot-password {
 }
 
 /*Image backgrounds*/
+#steps-section-bg {
+    background: #fafbfc url('../img/bg/undraw_air_support_wy1q.svg') no-repeat bottom center scroll;
+    -webkit-background-size: 55%;
+    -moz-background-size: 55%;
+    -o-background-size: 55%;
+    background-size: 55%;
+}
+
 #signup-section-bg {
     background: url('../img/bg/undraw_profile_data_mk6k.svg') repeat-x center center fixed;
+    -webkit-background-size: 45%;
+    -moz-background-size: 45%;
+    -o-background-size: 45%;
+    background-size: 45%;
+}
+
+#login-section-bg {
+    background: url('../img/bg/undraw_fingerprint_swrc.svg') repeat-x center center fixed;
     -webkit-background-size: 45%;
     -moz-background-size: 45%;
     -o-background-size: 45%;
