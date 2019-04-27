@@ -16,23 +16,56 @@
 </head>
 
 <body>
-<nav class="navbar">
+<nav class="navbar" role="navigation">
     <span class="navbar-toggle" id="js-navbar-toggle">
         <i class="fas fa-bars primary-color"></i>
     </span>
 
-    <a href="#" class="logo"><img src="img/quick_cash_logo.png" alt="Quick Cash logo"></a>
+    <a href="index.html" class="logo"><img src="img/quick_cash_logo.png" alt="Quick Cash logo"></a>
     <ul class="main-nav" id="js-menu">
-        <li>
+        <li class="dropdown" aria-haspopup="true">
+            <a href="#" class="nav-links">Users <i class="fas fa-caret-down"></i></a>
+
+            <ul aria-label="submenu" class="sub-menu">
+                <li><a href="admin_user_verification.html" class="nav-links">Verify user</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown" aria-haspopup="true">
+            <a href="#" class="nav-links">Loans <i class="fas fa-caret-down"></i></a>
+
+            <ul aria-label="submenu" class="sub-menu">
+                <li><a href="admin_all_loan_applications.html" class="nav-links">Applications</a></li>
+                <li><a href="admin_current_loans.html" class="nav-links">Current loans</a></li>
+                <li><a href="admin_repaid_loans.html" class="nav-links">Repaid loans</a></li>
+                <li><a href="admin_loan_approval.html" class="nav-links">Loan approval</a></li>
+                <li><a href="admin_view_specific_loan.html" class="nav-links">Specific loan</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown" aria-haspopup="true">
+            <a href="#" class="nav-links">Payment <i class="fas fa-caret-down"></i></a>
+
+            <ul aria-label="submenu" class="sub-menu">
+                <li><a href="admin_post_loan_repayment.html" class="nav-links">Post repayment</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown" aria-haspopup="true">
             <a href="#" class="nav-links">
                 <i class="fas fa-check-circle zoom primary-color" title="verified"></i>
-                John Doe <span class="small-text primary-color">- Admin</span>
-                <i class="fas fa-caret-down"></i>
+                John Doe <span class="small-text primary-color"><em>Admin </em></span><i class="fas fa-caret-down"></i>
             </a>
+
+            <ul aria-label="submenu" class="sub-menu">
+                <li><a href="user_home.html" class="nav-links">Profile</a></li>
+                <li><a href="admin_dashboard.html" class="nav-links">Dashboard</a></li>
+                <li><a href="index.html" class="nav-links">Sign out <i class="fas fa-sign-out-alt"></i></a></li>
+            </ul>
         </li>
 
         <li>
-            <a href="#" class="nav-links" title="Need help?"><i class="far fa-question-circle rotate"></i></a>
+            <a href="help.html" class="nav-links" title="Need help?"><i class="far fa-question-circle rotate"></i></a>
         </li>
     </ul>
 </nav>
@@ -46,7 +79,7 @@
 
 <section>
     <div class="container">
-        <div><a href="#" class="no-underline">Dashboard</a> > <a href="#" class="no-underline">Loans</a> > <a href="#" class="no-underline">Current</a> > Repayment</div>
+        <div><a href="admin_dashboard.html" class="no-underline">Dashboard</a> > <a href="admin_current_loans.html" class="no-underline">Current</a> > Repayment</div>
 
         <div class="display-flex-row margin-t-2">
             <div class="align-center">
@@ -84,18 +117,18 @@
     <div class="container">
         <div class="display-flex-row">
             <div id="footer-logo-div">
-                <a href="#"><img class="rotate" src="img/quick_cash_outline_logo.png" alt="quick cash outline logo"></a>
+                <a href="index.html"><img class="rotate" src="img/quick_cash_outline_logo.png" alt="quick cash outline logo"></a>
             </div>
 
             <ul class="list-unstyled" id="footer-menu">
                 <li>
-                    <a href="#">Help</a>
+                    <a href="help.html" target="_blank">Help</a>
                 </li>
                 <li>
                     <a href="#">Documentation</a>
                 </li>
                 <li>
-                    <a href="#">Privacy & Terms</a>
+                    <a href="privacy_terms.html" target="_blank">Privacy & Terms</a>
                 </li>
             </ul>
         </div>
@@ -106,7 +139,7 @@
                 <li class="text-muted">support@quickcredit.com</li>
             </ul>
 
-            <p class="margin-t-1 text-muted">&copy; <a href="#" class="color-black primary-hover-color">Quick Credit</a>
+            <p class="margin-t-1 text-muted">&copy; <a href="index.html" class="color-black primary-hover-color">Quick Credit</a>
                 <script>document.write(new Date().getFullYear())</script>. All Rights Reserved
             </p>
         </div>

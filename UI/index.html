@@ -16,27 +16,33 @@
 </head>
 
 <body>
-<nav class="navbar">
+
+<nav class="navbar" role="navigation">
     <span class="navbar-toggle" id="js-navbar-toggle">
         <i class="fas fa-bars primary-color"></i>
     </span>
 
-    <a href="#" class="logo"><img src="img/quick_cash_logo.png" alt="Quick Cash logo"></a>
+    <a href="index.html" class="logo"><img src="img/quick_cash_logo.png" alt="Quick Cash logo"></a>
     <ul class="main-nav" id="js-menu">
-        <li>
-            <a href="#" class="nav-links">Quick Credit?</a>
+        <li class="dropdown" aria-haspopup="true">
+            <a href="#" class="nav-links">Home <i class="fas fa-caret-down"></i></a>
+
+            <ul aria-label="submenu" class="sub-menu">
+                <li><a href="admin_dashboard.html">Admin dashboard</a></li>
+                <li><a href="user_home.html">User profile</a></li>
+            </ul>
         </li>
         <li>
-            <a href="#" class="nav-links">Why choose us?</a>
+            <a href="loan_application.html" class="nav-links">Apply</a>
         </li>
         <li>
-            <a href="#" class="nav-links"><button class="button primary-outline-button nav-button">Sign in</button></a>
+            <a href="login.html" class="nav-links"><button class="button primary-outline-button nav-button">Sign in</button></a>
         </li>
         <li>
-            <a href="#" class="nav-links"><button class="button primary-button nav-button">Sign up</button></a>
+            <a href="signup.html" class="nav-links"><button class="button primary-button nav-button">Sign up</button></a>
         </li>
         <li>
-            <a href="#" class="nav-links" title="Need help?"><i class="far fa-question-circle rotate"></i></a>
+            <a href="help.html" target="_blank" class="nav-links" title="Need help?"><i class="far fa-question-circle rotate"></i></a>
         </li>
     </ul>
 </nav>
@@ -46,12 +52,12 @@
         <div id="inner-header-contents">
             <h1 class="margin-b-1">Your <span class="box-shadow" id="quick-text">easy</span> access to soft loans</h1>
             <p class="margin-b-1">We're helping solve problems of financial inclusion as a way to alleviate poverty and empower low income earners</p>
-            <p class="margin-t-2"><a href="#"><button class="button primary-button">Let's get you started</button></a></p>
+            <p class="margin-t-2"><a href="signup.html"><button class="button primary-button">Let's get you started</button></a></p>
         </div>
     </div>
 </header>
 
-<section>
+<section id="quick-credit-section">
     <div class="container">
         <div class="align-center">
             <div class="margin-t-1">
@@ -59,12 +65,12 @@
             </div>
             <h2 class="margin-t-1">Quick Credit is for everyone</h2>
             <p class="margin-t-1">There's <span id="delay-span">no payment delays</span> once everything checks out. We don't want you to feel any pressure using our platform, because we know how stressful paper works can be. We have a genuine interest in helping people find their path towards financial freedom.</p>
-            <p class="margin-t-1"><a href="#"><button class="button primary-outline-button">Start here</button></a></p>
+            <p class="margin-t-1"><a href="signup.html"><button class="button primary-outline-button">Start here</button></a></p>
         </div>
     </div>
 </section>
 
-<section>
+<section id="features-section">
     <div class="container">
         <div class="display-flex-row">
             <div class="z-0">
@@ -161,14 +167,14 @@
             </div>
         </div>
 
-        <div><a href="#"><button class="button primary-button">Start right here <i class="fas fa-rocket"></i></button></a></div>
+        <div><a href="signup.html"><button class="button primary-button">Start right here <i class="fas fa-rocket"></i></button></a></div>
     </div>
 </section>
 
 <section>
     <div class="container align-center">
         <h2 class="margin-b-1">See how excited others are about
-            <a href="#"><span id="quick-credit-span">Quick Credit</span></a>
+            <a href="#quick-credit-section"><span id="quick-credit-span">Quick Credit</span></a>
         </h2>
         <div class="display-flex-row">
             <figure class="figure">
@@ -200,18 +206,18 @@
     <div class="container">
         <div class="display-flex-row">
             <div id="footer-logo-div">
-                <a href="#"><img class="rotate" src="img/quick_cash_outline_logo.png" alt="quick cash outline logo"></a>
+                <a href="index.html"><img class="rotate" src="img/quick_cash_outline_logo.png" alt="quick cash outline logo"></a>
             </div>
 
             <ul class="list-unstyled" id="footer-menu">
                 <li>
-                    <a href="#">Help</a>
+                    <a href="help.html" target="_blank">Help</a>
                 </li>
                 <li>
                     <a href="#">Documentation</a>
                 </li>
                 <li>
-                    <a href="#">Privacy & Terms</a>
+                    <a href="privacy_terms.html" target="_blank">Privacy & Terms</a>
                 </li>
             </ul>
         </div>
@@ -222,7 +228,7 @@
                 <li class="text-muted">support@quickcredit.com</li>
             </ul>
 
-            <p class="margin-t-1 text-muted">&copy; <a href="#" class="color-black primary-hover-color">Quick Credit</a>
+            <p class="margin-t-1 text-muted">&copy; <a href="index.html" class="color-black primary-hover-color">Quick Credit</a>
                 <script>document.write(new Date().getFullYear())</script>. All Rights Reserved
             </p>
         </div>
