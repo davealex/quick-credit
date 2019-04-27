@@ -16,19 +16,27 @@
 </head>
 
 <body>
-<nav class="navbar">
+<nav class="navbar" role="navigation">
     <span class="navbar-toggle" id="js-navbar-toggle">
         <i class="fas fa-bars primary-color"></i>
     </span>
 
-    <a href="#" class="logo"><img src="img/quick_cash_logo.png" alt="Quick Cash logo"></a>
+    <a href="index.html" class="logo"><img src="img/quick_cash_logo.png" alt="Quick Cash logo"></a>
     <ul class="main-nav" id="js-menu">
         <li>
-            <a href="#" class="nav-links"><i class="fas fa-check-circle zoom primary-color" title="verified"></i> John Doe <i class="fas fa-caret-down"></i></a>
+            <a href="loan_application.html" class="nav-links">Get loan</a>
+        </li>
+        <li class="dropdown" aria-haspopup="true">
+            <a href="user_home.html" class="nav-links"><i class="fas fa-check-circle zoom primary-color" title="verified"></i> John Doe <i class="fas fa-caret-down"></i></a>
+
+            <ul aria-label="submenu" class="sub-menu">
+                <li><a href="loan_repayment_history.html" class="nav-links">Repayments</a></li>
+                <li><a href="index.html" class="nav-links">Sign out <i class="fas fa-sign-out-alt"></i></a></li>
+            </ul>
         </li>
 
         <li>
-            <a href="#" class="nav-links" title="Need help?"><i class="far fa-question-circle rotate"></i></a>
+            <a href="help.html" class="nav-links" title="Need help?"><i class="far fa-question-circle rotate"></i></a>
         </li>
     </ul>
 </nav>
@@ -43,7 +51,7 @@
 
 <section>
     <div class="container">
-        <div><a href="#" class="no-underline">Profile</a> > Apply</div>
+        <div><a href="user_home.html" class="no-underline">Profile</a> > Apply</div>
 
         <div class="display-flex-row">
             <div class="align-center">
@@ -78,11 +86,11 @@
                             <div class="margin-tb-1">
                                 <div class="checkbox">
                                     <input type="checkbox" checked="checked" id="agreement">
-                                    <label for="agreement">I agree to the <a href="#">Privacy & Terms</a></label>
+                                    <label for="agreement">I agree to the <a href="privacy_terms.html">Privacy & Terms</a></label>
                                 </div>
                             </div>
 
-                            <a href="#"><button type="submit" class="button primary-outline-button submit-form">Apply</button></a>
+                            <a href="loan_repayment_history.html"><button type="submit" class="button primary-outline-button submit-form">Apply</button></a>
                         </form>
                     </div>
                 </div>
@@ -95,18 +103,18 @@
     <div class="container">
         <div class="display-flex-row">
             <div id="footer-logo-div">
-                <a href="#"><img class="rotate" src="img/quick_cash_outline_logo.png" alt="quick cash outline logo"></a>
+                <a href="index.html"><img class="rotate" src="img/quick_cash_outline_logo.png" alt="quick cash outline logo"></a>
             </div>
 
             <ul class="list-unstyled" id="footer-menu">
                 <li>
-                    <a href="#">Help</a>
+                    <a href="help.html" target="_blank">Help</a>
                 </li>
                 <li>
                     <a href="#">Documentation</a>
                 </li>
                 <li>
-                    <a href="#">Privacy & Terms</a>
+                    <a href="privacy_terms.html" target="_blank">Privacy & Terms</a>
                 </li>
             </ul>
         </div>
@@ -117,7 +125,7 @@
                 <li class="text-muted">support@quickcredit.com</li>
             </ul>
 
-            <p class="margin-t-1 text-muted">&copy; <a href="#" class="color-black primary-hover-color">Quick Credit</a>
+            <p class="margin-t-1 text-muted">&copy; <a href="index.html" class="color-black primary-hover-color">Quick Credit</a>
                 <script>document.write(new Date().getFullYear())</script>. All Rights Reserved
             </p>
         </div>
