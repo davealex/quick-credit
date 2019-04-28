@@ -1,3 +1,5 @@
+<a href="https://github.com/davealex/quick-credit"><img src="https://davealex.github.io/quick-credit/UI/img/quick_cash_logo.png" alt="Quick Credit" /></a>
+
 # quick-credit
 
 An online lending platform that provides short term soft loans to individuals.
@@ -18,8 +20,8 @@ Some of the amazing resources used so far in this project:
 
 * [Unsplash](https://unsplash.com) - Amazing curation of royalty free images!
 * [unDraw](https://unsplash.com) - She's an amazing artist with a big heart!
-* [GoogleFonts](https://fonts.google.com) - All the fonts one would ever need in a project.
-* [Fontawesome](https://fontawesome.com) - An endless list of free icons.
+* [Google Fonts](https://fonts.google.com) - All the fonts one would ever need in a project.
+* [Font Awesome](https://fontawesome.com) - An endless list of free icons.
 
 ### Font(s)
 
@@ -27,5 +29,5 @@ Inconsolata
 
 ### Links
 
-[Pivotal.com](https://www.pivotaltracker.com/n/projects/2327055)
-[Github Pages](https://davealex.github.io/quick-credit/UI/)
+* [Pivotal](https://www.pivotaltracker.com/n/projects/2327055)
+* [Github Pages](https://davealex.github.io/quick-credit/UI/)
