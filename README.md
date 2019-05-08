@@ -1,6 +1,6 @@
 <a href="https://github.com/davealex/quick-credit"><img src="https://davealex.github.io/quick-credit/UI/img/quick_cash_logo.png" alt="Quick Credit" /></a>
 
-# quick-credit
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 An online lending platform that provides short term soft loans to individuals.
 
