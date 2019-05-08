@@ -1,0 +1,50 @@
+{
+  "name": "quick-credit",
+  "version": "1.0.0",
+  "description": "An online lending platform that provides short term soft loans to individuals",
+  "main": "./backend/dist/server.js",
+  "scripts": {
+    "start": "npm run build && nodemon --exec babel-node ./backend/dist/server.js",
+    "build": "babel ./backend/src --out-dir ./backend/dist --source-maps",
+    "serve": "node ./backend/dist/server.js",
+    "test": "mocha --require @babel/register",
+    "debug": "node --inspect-brk ./backend/dist/server.js",
+    "lint": "eslint ./backend --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davealex/quick-credit.git"
+  },
+  "keywords": [
+    "loan",
+    "credit",
+    "finance"
+  ],
+  "author": "David Abiola Olaleye <daveabiola@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davealex/quick-credit/issues"
+  },
+  "homepage": "https://github.com/davealex/quick-credit#readme",
+  "dependencies": {
+    "app-root-path": "^2.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.16.4",
+    "npm-run-all": "^4.1.5",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "chai": "^4.2.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.0"
+  }
+}
