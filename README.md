@@ -11,7 +11,7 @@ income earners.
 
   - User authentication system
   - User verification
-  - Roles and priviledges
+  - Roles and privileges
   - Loan management system
   
 ### Resources

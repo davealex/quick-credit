@@ -7,6 +7,8 @@ module.exports = {
   APP_NAME: process.env.APP_NAME,
   ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
+  HOST: process.env.HOST,
   LOG_LEVEL: process.env.LOG_LEVEL,
   APP_ROOT: appRoot,
+  JWT_KEY: process.env.JWT_KEY,
 };
