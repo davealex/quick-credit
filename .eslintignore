@@ -1,4 +1,4 @@
 /.eslintignore
 /node_modules/
 /backend/dist/*
-!/backend/dist/index.js
+!/backend/dist/api.js

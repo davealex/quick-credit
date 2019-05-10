@@ -6,8 +6,9 @@
   "scripts": {
     "start": "npm run build && nodemon --exec babel-node ./backend/dist/server.js",
     "build": "babel ./backend/src --out-dir ./backend/dist --source-maps",
+    "dev": "npm run build && nodemon --exec babel-node ./backend/src/server.js",
     "serve": "node ./backend/dist/server.js",
-    "test": "mocha --require @babel/register",
+    "test": "mocha ./backend/tests/**/*.spec.js",
     "debug": "node --inspect-brk ./backend/dist/server.js",
     "lint": "eslint ./backend --fix"
   },
@@ -28,9 +29,14 @@
   "homepage": "https://github.com/davealex/quick-credit#readme",
   "dependencies": {
     "app-root-path": "^2.2.1",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.5.6",
     "npm-run-all": "^4.1.5",
     "winston": "^3.2.1"
   },
