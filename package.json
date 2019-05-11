@@ -4,7 +4,7 @@
   "description": "An online lending platform that provides short term soft loans to individuals",
   "main": "./backend/dist/server.js",
   "scripts": {
-    "start": "npm run build && nodemon --exec babel-node ./backend/dist/server.js",
+    "start": "npm run build && babel-node ./backend/dist/server.js",
     "build": "babel ./backend/src --out-dir ./backend/dist --source-maps",
     "dev": "npm run build && nodemon --exec babel-node ./backend/src/server.js",
     "serve": "node ./backend/dist/server.js",
