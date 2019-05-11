@@ -1,6 +1,9 @@
 <a href="https://github.com/davealex/quick-credit"><img src="https://davealex.github.io/quick-credit/UI/img/quick_cash_logo.png" alt="Quick Credit" /></a>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.com/davealex/quick-credit.svg?branch=develop)](https://travis-ci.com/davealex/quick-credit)
+[![Coverage Status](https://coveralls.io/repos/github/davealex/quick-credit/badge.svg?branch=develop)](https://coveralls.io/github/davealex/quick-credit?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2602170294c5c439ced4/maintainability)](https://codeclimate.com/github/davealex/quick-credit/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2602170294c5c439ced4/test_coverage)](https://codeclimate.com/github/davealex/quick-credit/test_coverage)
 
 An online lending platform that provides short term soft loans to individuals.
 
@@ -31,3 +34,7 @@ Inconsolata
 
 * [Pivotal](https://www.pivotaltracker.com/n/projects/2327055)
 * [Github Pages](https://davealex.github.io/quick-credit/UI/)
+
+### Licence
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
