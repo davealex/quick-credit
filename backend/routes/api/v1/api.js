@@ -1,20 +1,14 @@
 const express = require('express');
 
-const router = express.Router();
+const routerV1 = express.Router();
 
-const Users = require('../controllers/userController');
-const Index = require('../controllers/indexController');
+const User = require('../../../controllers/userController');
 
-const apiVersion = '/api/v1';
-
-// API home endpoint
-router.get('/', Index.getIndex);
-
-// user signup endpoints
+// user signup endpoint
 /**
  * @swagger
  *
- * /api/v1/signup:
+ * /api/v1/auth/signup:
  *   post:
  *     description: Signup to the application
  *     produces:
@@ -59,6 +53,32 @@ router.get('/', Index.getIndex);
  *       201:
  *         description: signup
  */
-router.post(`${apiVersion}/auth/signup`, Users.signUp);
+routerV1.post('/auth/signup', User.signUp);
 
-module.exports = router;
+// user sign in
+/**
+ * @swagger
+ *
+ * /api/v1/auth/signin:
+ *   post:
+ *     description: Signup to the application
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: email
+ *         description: User Email Address.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: password
+ *         description: User's password.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     responses:
+ *       201:
+ *         description: signup
+ */
+routerV1.post('/auth/signin', User.signIn);
+
+module.exports = routerV1;

@@ -33,22 +33,20 @@ describe('User signup', () => {
         logger.error({ message: err.message });
       });
   });
-});
 
-// Test for invalid registration:
-it('Should fail if data is not sent', (done) => {
-// mock invalid user input
-  const newUser = {};
+  // Test for invalid registration:
+  it('Should fail if data is not sent', (done) => {
+    // mock invalid user input
+    const newUser = {};
 
-  // send request to the app
-  chai.request(app).post('/api/v1/auth/signup')
-    .send(newUser)
-    .then((res) => {
-      expect(res).to.have.status(422);
-      expect(res.body.error.length).to.be.greaterThan(0);
-      done();
-    })
-    .catch((err) => {
-      logger.error({ message: err.message });
-    });
+    // send request to the app
+    chai.request(app).post('/api/v1/auth/signup')
+      .send(newUser)
+      .then((res) => {
+        expect(res).to.have.status(422);
+        expect(res.body.error.length).to.be.greaterThan(0);
+        done();
+      })
+      .catch(err => logger.error({ message: err.message }));
+  });
 });

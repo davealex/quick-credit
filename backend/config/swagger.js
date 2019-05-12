@@ -6,7 +6,7 @@ const options = {
     info: {
       title: 'Quick Credit API',
       version: '1.0.0',
-      description: 'An online lending platform that provides short term soft loans to individuals',
+      description: 'Documentation - An online lending platform that provides short term soft loans to individuals',
     },
     schemes: {
       https: 'https',
@@ -14,7 +14,7 @@ const options = {
     },
   },
   // List of files to be processed. You can also set globs '../routes/*.js'
-  apis: ['./backend/routes/api.js'],
+  apis: ['./backend/routes/api/v1/api.js'],
 
 };
 
