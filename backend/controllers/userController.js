@@ -79,3 +79,24 @@ exports.signIn = (req, res) => {
     });
   }
 };
+
+exports.verify = (req, res) => {
+  const userEmail = req.params.email;
+
+  if (!validateEmail(userEmail)) {
+    return res.status(401).json({
+      status: 401,
+      error: 'The email address is invalid',
+    });
+  }
+
+  return res.status(200).json({
+    status: 200,
+    data: {
+      email: userEmail,
+      firstName: 'James',
+      lastName: 'Bond',
+      status: 'verified',
+    },
+  });
+};
