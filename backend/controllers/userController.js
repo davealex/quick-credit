@@ -1,37 +1,20 @@
 const users = require('../seeds/users');
-const { generateToken, hash, validateEmail } = require('../util/helpers');
-
-exports.getAllUsers = (req, res) => {
-  res.status(200).json(
-    {
-      status: 200,
-      data: users,
-    },
-  );
-};
+const {
+  generateToken, validateEmail, compare, validateRequiredFields,
+} = require('../util/helpers');
 
 exports.signUp = (req, res) => {
-  const {
-    firstName, lastName, email, password, confirmPassword, homeAddress, workAddress,
-  } = req.body;
+  const { email, password, confirmPassword } = req.body;
+  const expectedValues = ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'homeAddress', 'workAddress'];
   const error = [];
-  if (!firstName) error.push({ firstName: 'The first name field is required' });
 
-  if (!lastName) error.push({ lastName: 'The last name field is required' });
+  // required fields validation
+  validateRequiredFields(expectedValues, req.body, error);
 
-  if (!email) error.push({ email: 'The email field is required' });
-
+  // extra validation
   if (!validateEmail(email)) error.push({ email: 'The email address is not valid' });
-
-  if (!password) error.push({ password: 'The password field is required' });
-
-  if (!confirmPassword) error.push({ confirmPassword: 'The confirm password field is required' });
-
   if (confirmPassword !== password) error.push({ confirmPassword: 'The password does not match password field' });
 
-  if (!homeAddress) error.push({ homeAddress: 'The home address field is required' });
-
-  if (!workAddress) error.push({ workAddress: 'The work address field is required' });
   if (error.length > 0) {
     res.status(422).json({
       status: 422,
@@ -46,8 +29,6 @@ exports.signUp = (req, res) => {
     id,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
-    password: hash(req.body.password),
-    confirmPassword: hash(req.body.confirmPassword),
     email: req.body.email,
     homeAddress: req.body.homeAddress,
     workAddress: req.body.workAddress,
@@ -58,4 +39,43 @@ exports.signUp = (req, res) => {
     status: 201,
     data,
   });
+};
+
+exports.signIn = (req, res) => {
+  const error = [];
+  const expectedValues = ['email', 'password'];
+
+  // required fields validation
+  validateRequiredFields(expectedValues, req.body, error);
+
+  if (error.length > 0) {
+    res.status(422).json({
+      status: 422,
+      error,
+    });
+
+    return;
+  }
+
+  // authenticated user
+  const authUser = users
+    .filter(user => user.email === req.body.email && compare(req.body.password, user.password));
+
+  if (authUser === [] || authUser[0] === undefined) {
+    res.status(403).json({
+      status: 403,
+      error: 'Invalid username or password',
+    });
+  } else {
+    res.status(200).json({
+      status: 200,
+      data: {
+        token: generateToken(authUser[0].email),
+        id: authUser[0].id,
+        firstName: authUser[0].firstName,
+        lastName: authUser[0].lastName,
+        email: authUser[0].email,
+      },
+    });
+  }
 };

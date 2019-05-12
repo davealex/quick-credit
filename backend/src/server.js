@@ -6,11 +6,13 @@ const swaggerUi = require('swagger-ui-express');
 
 const { PORT } = require('../config/app');
 
-const router = require('../routes/api');
+const routerV1 = require('../routes/api/v1/api');
 
 const specs = require('../config/swagger');
 
 const app = express();
+
+const Index = require('../controllers/indexController');
 
 app.use(cors());
 
@@ -19,7 +21,20 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/v1/documentation', swaggerUi.serve, swaggerUi.setup(specs));
 
-app.use('/', router);
+app.use('/api/v1', routerV1);
+
+// respond to GET '/'
+app.use((req, res, next) => {
+  if (req.originalUrl === '/') Index.getIndex(req, res);
+  next();
+});
+
+app.use((req, res) => {
+  res.status(404);
+
+  // respond with json
+  if (req.accepts('json')) res.send({ status: 404, error: 'Oops...! Are you lost?' });
+});
 
 app.listen(PORT || 3000);
 
