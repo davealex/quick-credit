@@ -3,6 +3,7 @@ const express = require('express');
 const routerV1 = express.Router();
 
 const User = require('../../../controllers/userController');
+const isAdmin = require('../../../middlewares/admin');
 
 // user signup endpoint
 /**
@@ -76,9 +77,25 @@ routerV1.post('/auth/signup', User.signUp);
  *         required: true
  *         type: string
  *     responses:
- *       201:
- *         description: signup
+ *       200:
+ *         description: sign in
  */
 routerV1.post('/auth/signin', User.signIn);
+
+// verify user
+/**
+ * @swagger
+ *
+ * /api/v1/users/:email/verify:
+ *   patch:
+ *     description: User Verification
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: signup
+ */
+
+routerV1.patch('/users/:email/verify', isAdmin, User.verify);
 
 module.exports = routerV1;
