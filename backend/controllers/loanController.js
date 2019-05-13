@@ -68,3 +68,17 @@ exports.index = (req, res) => res.status(200).json({
   status: 200,
   data: loans,
 });
+
+exports.repayments = (req, res) => {
+  const { loanId } = req.params;
+
+  return res.status(200).json({
+    status: 200,
+    data: {
+      loanId: Number(loanId),
+      createdOn: new Date(),
+      monthlyInstallment: 333.22,
+      amount: 499.99,
+    },
+  });
+};
