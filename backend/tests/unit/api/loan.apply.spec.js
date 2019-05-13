@@ -36,7 +36,7 @@ describe('Loans', () => {
       .catch(err => logger.error({ message: err.message }));
   });
 
-  it('Should not create a loan resource ', (done) => {
+  it('Should not create a loan resource without request fields', (done) => {
     const newLoan = {};
 
     chai.request(app).post('/api/v1/loans')
