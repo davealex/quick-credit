@@ -1,3 +1,4 @@
+const loans = require('../seeds/loans');
 const compute = require('../util/loanComputedValues');
 
 exports.store = (req, res) => {
@@ -62,3 +63,8 @@ exports.show = (req, res) => {
     },
   });
 };
+
+exports.index = (req, res) => res.status(200).json({
+  status: 200,
+  data: loans,
+});

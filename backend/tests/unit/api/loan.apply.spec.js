@@ -9,7 +9,7 @@ const app = require('../../../src/server');
 chai.use(chaiHttp);
 
 
-describe('Loans', () => {
+describe('Loan Application', () => {
   it('Should be able to apply for a loan', (done) => {
     // mock valid user input
     const newLoan = {
