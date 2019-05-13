@@ -176,6 +176,21 @@ routerV1.get('/loans/:loanId', isAdmin, Loan.show);
  *     description: view specific loan
  *     produces:
  *       - application/json
+ *     responses:
+ *       200:
+ *         description: view specific loan
+ */
+routerV1.get('/loans', isAdmin, Loan.index);
+
+// view loan repayment history
+/**
+ * @swagger
+ *
+ * /api/v1/loans/:loanId/repayments:
+ *   get:
+ *     description: view loan repayment history
+ *     produces:
+ *       - application/json
  *     parameters:
  *       - name: loanId
  *         description: loan Id.
@@ -184,8 +199,8 @@ routerV1.get('/loans/:loanId', isAdmin, Loan.show);
  *         type: integer
  *     responses:
  *       200:
- *         description: view specific loan
+ *         description: view loan repayment history
  */
-routerV1.get('/loans', isAdmin, Loan.index);
+routerV1.get('/loans/:loanId/repayments', Loan.repayments);
 
 module.exports = routerV1;
