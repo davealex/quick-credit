@@ -92,9 +92,15 @@ routerV1.post('/auth/signin', User.signIn);
  *     description: User Verification
  *     produces:
  *       - application/json
+ *     parameters:
+ *       - name: email
+ *         description: User email.
+ *         in: url
+ *         required: true
+ *         type: string
  *     responses:
  *       200:
- *         description: signup
+ *         description: verify user
  */
 
 routerV1.patch('/users/:email/verify', isAdmin, User.verify);
@@ -139,5 +145,26 @@ routerV1.patch('/users/:email/verify', isAdmin, User.verify);
  *         description: loan application
  */
 routerV1.post('/loans', Loan.store);
+
+// view specific loan
+/**
+ * @swagger
+ *
+ * /api/v1/loans/:loanId:
+ *   patch:
+ *     description: view specific loan
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: loanId
+ *         description: loan Id.
+ *         in: url
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: view specific loan
+ */
+routerV1.get('/loans/:loanId', isAdmin, Loan.show);
 
 module.exports = routerV1;

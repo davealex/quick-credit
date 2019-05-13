@@ -41,3 +41,24 @@ exports.store = (req, res) => {
     },
   });
 };
+
+exports.show = (req, res) => {
+  const { loanId } = req.params;
+
+
+  return res.status(200).json({
+    status: 200,
+    data: {
+      id: Number(loanId),
+      user: 'user@m.com',
+      createdOn: new Date().getTime(),
+      status: 'verified',
+      repaid: true,
+      tenor: 3,
+      amount: 3000.00,
+      paymentInstallment: 234.12,
+      balance: 12000.00,
+      interest: 6.0,
+    },
+  });
+};
