@@ -3,6 +3,7 @@ const express = require('express');
 const routerV1 = express.Router();
 
 const User = require('../../../controllers/userController');
+const Loan = require('../../../controllers/loanController');
 const isAdmin = require('../../../middlewares/admin');
 
 // user signup endpoint
@@ -97,5 +98,46 @@ routerV1.post('/auth/signin', User.signIn);
  */
 
 routerV1.patch('/users/:email/verify', isAdmin, User.verify);
+
+// user loan application
+/**
+ * @swagger
+ *
+ * /api/v1/loans:
+ *   post:
+ *     description: Apply for loan
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: firstName
+ *         description: User First Name.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: lastName
+ *         description: User Last Name.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: email
+ *         description: User Email Address.
+ *         in: formData
+ *         required: true
+ *         type: string
+ *       - name: tenor
+ *         description: loan repayment duration.
+ *         in: formData
+ *         required: true
+ *         type: integer
+ *       - name: amount
+ *         description: loan value.
+ *         in: formData
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       201:
+ *         description: loan application
+ */
+routerV1.post('/loans', Loan.store);
 
 module.exports = routerV1;
