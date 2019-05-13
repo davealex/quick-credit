@@ -8,7 +8,7 @@ const app = require('../../../src/server');
 
 chai.use(chaiHttp);
 
-describe('Loans', () => {
+describe('View Specific Loan', () => {
   it('Should get a specific loan', (done) => {
     const loan = {
       id: 1,

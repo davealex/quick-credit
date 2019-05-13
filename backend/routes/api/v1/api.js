@@ -151,7 +151,7 @@ routerV1.post('/loans', Loan.store);
  * @swagger
  *
  * /api/v1/loans/:loanId:
- *   patch:
+ *   get:
  *     description: view specific loan
  *     produces:
  *       - application/json
@@ -166,5 +166,26 @@ routerV1.post('/loans', Loan.store);
  *         description: view specific loan
  */
 routerV1.get('/loans/:loanId', isAdmin, Loan.show);
+
+// view all loan applications
+/**
+ * @swagger
+ *
+ * /api/v1/loans:
+ *   get:
+ *     description: view specific loan
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: loanId
+ *         description: loan Id.
+ *         in: url
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: view specific loan
+ */
+routerV1.get('/loans', isAdmin, Loan.index);
 
 module.exports = routerV1;
