@@ -4,7 +4,7 @@ const routerV1 = express.Router();
 
 const User = require('../../../controllers/userController');
 const Loan = require('../../../controllers/loanController');
-const isAdmin = require('../../../middlewares/admin');
+// const isAdmin = require('../../../middlewares/admin');
 
 // user signup endpoint
 /**
@@ -103,7 +103,7 @@ routerV1.post('/auth/signin', User.signIn);
  *         description: verify user
  */
 
-routerV1.patch('/users/:email/verify', isAdmin, User.verify);
+routerV1.patch('/users/:email/verify', User.verify);
 
 // user loan application
 /**
@@ -165,7 +165,7 @@ routerV1.post('/loans', Loan.store);
  *       200:
  *         description: view specific loan
  */
-routerV1.get('/loans/:loanId', isAdmin, Loan.show);
+routerV1.get('/loans/:loanId', Loan.show);
 
 // view all loan applications
 /**
@@ -173,14 +173,14 @@ routerV1.get('/loans/:loanId', isAdmin, Loan.show);
  *
  * /api/v1/loans:
  *   get:
- *     description: view specific loan
+ *     description: view all loans
  *     produces:
  *       - application/json
  *     responses:
  *       200:
  *         description: view specific loan
  */
-routerV1.get('/loans', isAdmin, Loan.index);
+routerV1.get('/loans', Loan.index);
 
 // view loan repayment history
 /**
@@ -202,5 +202,31 @@ routerV1.get('/loans', isAdmin, Loan.index);
  *         description: view loan repayment history
  */
 routerV1.get('/loans/:loanId/repayments', Loan.repayments);
+
+// view user repaid loans
+/**
+ * @swagger
+ *
+ * /api/v1/loans?status=approved&repaid=true:
+ *   get:
+ *     description: view user repaid loans
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: status
+ *         description: loan application status.
+ *         in: url
+ *         required: true
+ *         type: string
+ *       - name: repaid
+ *         description: loan repayment status.
+ *         in: url
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: view user repaid loans
+ */
+// routerV1.get('/loans?status=approved&repaid=true', Loan.repaid);
 
 module.exports = routerV1;
