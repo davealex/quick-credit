@@ -3,21 +3,23 @@ const chai = require('chai');
 const { expect } = require('chai');
 const chaiHttp = require('chai-http');
 const logger = require('../../../config/winston');
-const loans = require('../../../seeds/loans');
+
 const app = require('../../../src/server');
 
 chai.use(chaiHttp);
 
-describe('View Specific Loan', () => {
-  it('Should get a specific loan', (done) => {
-    const loan = loans[0];
-    chai.request(app).get(`/api/v1/loans/${loan.id}/`)
+
+describe('All Repaid Loans', () => {
+  it('Should get all approved and paid loans', (done) => {
+    chai.request(app).get('/api/v1/loans?status=approved&repaid=true')
       .send()
       .then((res) => {
         expect(res).to.have.status(200);
-        expect(loans).to.deep.include(loan);
-        expect(res.body.data.id).to.be.equal(loan.id);
-        expect(res.body.data.user).to.be.equal(loan.user);
+        const { data } = res.body;
+        data.forEach((loan) => {
+          expect(loan.status).to.be.equal('approved');
+          expect(loan.repaid).to.be.equal(true);
+        });
 
         done();
       })

@@ -46,28 +46,38 @@ exports.store = (req, res) => {
 exports.show = (req, res) => {
   const { loanId } = req.params;
 
+  if (loanId !== '' && loanId !== null && (loans.some(loan => loan.id === Number(loanId)))) {
+    const specificLoan = loans.find(loan => Number(loanId) === loan.id);
 
-  return res.status(200).json({
-    status: 200,
-    data: {
-      id: Number(loanId),
-      user: 'user@m.com',
-      createdOn: new Date().getTime(),
-      status: 'verified',
-      repaid: true,
-      tenor: 3,
-      amount: 3000.00,
-      paymentInstallment: 234.12,
-      balance: 12000.00,
-      interest: 6.0,
-    },
+    return res.status(200).json({
+      status: 200,
+      data: specificLoan,
+    });
+  }
+
+  return res.status(404).json({
+    status: 404,
+    error: 'record not found',
   });
 };
 
-exports.index = (req, res) => res.status(200).json({
-  status: 200,
-  data: loans,
-});
+exports.index = (req, res) => {
+  if (Object.prototype.hasOwnProperty.call(req.query, 'status') && Object.prototype.hasOwnProperty.call(req.query, 'repaid')) {
+    if (req.query.status === 'approved' && req.query.repaid === 'true') {
+      const paidLoans = loans.filter(paid => paid.status === 'approved' && paid.repaid === true);
+      return res.status(200)
+        .json({
+          status: 200,
+          data: paidLoans,
+        });
+    }
+  }
+
+  return res.status(200).json({
+    status: 200,
+    data: loans,
+  });
+};
 
 exports.repayments = (req, res) => {
   const { loanId } = req.params;

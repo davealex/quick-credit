@@ -4,3 +4,19 @@ node_js:
 cache:
   directories:
     - "node_modules"
+env:
+  global:
+    - CC_TEST_REPORTER_ID=01dc038d011f86a86b0cf97509ae5e5f3e8d4e2dff0527220dacdaa04b80e68a
+    - NODE_ENV=test
+node_js:
+ - "8.12.0"
+before_script:
+  - yarn global add nyc
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+ - npm run coveralls
+ - npm run coverage
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
