@@ -82,10 +82,6 @@ p {
     align-items: center;
 }
 
-.flex-space {
-    justify-content: space-between;
-}
-
 .z-0 {
     z-index: 0;
 }
@@ -166,7 +162,7 @@ p {
     padding-top: 3rem;
     padding-bottom: .5em;
     min-height: 450px;
-    background: linear-gradient(#46c75e, #164124);
+    background: linear-gradient(#46c75e, #2e894a);
     -webkit-background-size: 60%;
     -moz-background-size: 60%;
     -o-background-size: 60%;
@@ -183,6 +179,11 @@ p {
 
 #inner-header-contents {
     max-width: 35rem;
+}
+
+#header-text {
+    font-size: 190%;
+    font-weight: 700;
 }
 
 .button {
@@ -212,6 +213,10 @@ p {
 .feature-image {
     max-width: 200px;
     margin-bottom: 1.5rem;
+}
+
+.feature-image-div {
+    text-align: center;
 }
 
 .main-nav {
@@ -327,6 +332,14 @@ ul li ul {
         margin-bottom: 1.5rem;
     }
 
+    .feature-image-div {
+        text-align: left;
+    }
+
+    .flex-space {
+        justify-content: space-between;
+    }
+
     .footer {
         padding-top: 3rem;
         padding-bottom: 3rem;
@@ -346,11 +359,15 @@ ul li ul {
         padding-top: 5rem;
         padding-bottom: 5rem;
         min-height: 600px;
-        background: url('../img/bg/undraw_transfer_money_rywa.svg')  no-repeat right center scroll, linear-gradient(#46c75e, #164124);
+        background: url('../img/bg/undraw_transfer_money_rywa.svg')  no-repeat right center scroll, linear-gradient(#46c75e, #2e894a);
         -webkit-background-size: 55%;
         -moz-background-size: 55%;
         -o-background-size: 55%;
         background-size: 55%;
+    }
+
+    #header-text {
+        font-size: 230%;
     }
 
     .button {
@@ -416,10 +433,6 @@ ul li ul {
     padding: .1em;
     font-weight: 700;
     text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
-}
-
-#header-text {
-    font-size: 230%;
 }
 
 
