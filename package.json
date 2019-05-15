@@ -10,7 +10,9 @@
     "serve": "node ./backend/dist/server.js",
     "test": "mocha --exit ./backend/tests/**/*.spec.js",
     "debug": "node --inspect-brk ./backend/dist/server.js",
-    "lint": "eslint ./backend --fix"
+    "lint": "eslint ./backend --fix",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
   "repository": {
     "type": "git",
