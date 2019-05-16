@@ -105,13 +105,33 @@ exports.repayments = (req, res) => {
 exports.update = (req, res) => {
   const { loanId } = req.params;
 
+  const errors = [];
+  const expectedValue = ['status'];
+
+  expectedValue.forEach((value) => {
+    if (!(value in req.body)) {
+      errors.push({
+        [value]: `The ${value} field is required`,
+      });
+    }
+  });
+
+  if (errors.length > 0) {
+    res.status(422).json({
+      status: 422,
+      errors,
+    });
+
+    return;
+  }
+
   if (loanId.trim() !== '' && loanId.trim() !== null && (loans.some(loan => loan.id === Number(loanId)))) {
     const specificLoan = loans.find(loan => Number(loanId) === loan.id);
 
     if (!('status' in req.body)) {
       res.status(422).json({
         status: 422,
-        error: 'The status field is required',
+        error: 'Invalid input value',
       });
 
       return;
@@ -134,4 +154,48 @@ exports.update = (req, res) => {
       error: 'record not found',
     });
   }
+};
+
+exports.createRepayment = (req, res) => {
+  const { loanId } = req.params;
+  const error = [];
+  const expectedValue = ['loanId', 'amount'];
+
+  expectedValue.forEach((value) => {
+    if (!(value.trim() in req.body) || value.trim() === '' || value.trim() === null) {
+      error.push({
+        [value]: `The ${value} field is required`,
+      });
+    }
+  });
+
+  if (error.length > 0) {
+    res.status(422).json({
+      status: 422,
+      error,
+    });
+
+    return;
+  }
+
+  if (loans.some(loan => loan.id === Number(loanId))) {
+    const specificLoan = loans.find(loan => Number(loanId) === loan.id);
+    res.status(200).json({
+      status: 200,
+      data: {
+        id: 2,
+        loanId: Number(specificLoan.id),
+        createdOn: new Date().getTime(),
+        amount: specificLoan.amount,
+        monthlyInstallment: specificLoan.paymentInstallment,
+        paidAmount: req.body.paidAmount,
+        balance: req.body.balance,
+      },
+    });
+  }
+
+  res.status(404).json({
+    status: 404,
+    error: 'record not found',
+  });
 };
