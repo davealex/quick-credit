@@ -73,11 +73,11 @@ exports.index = (req, res) => {
     }
 
     if (req.query.status === 'approved' && req.query.repaid === 'false') {
-      const paidLoans = loans.filter(paid => paid.status === 'approved' && paid.repaid === false);
+      const currentLoans = loans.filter(paid => paid.status === 'approved' && paid.repaid === false);
       return res.status(200)
         .json({
           status: 200,
-          data: paidLoans,
+          data: currentLoans,
         });
     }
   }
@@ -100,4 +100,38 @@ exports.repayments = (req, res) => {
       amount: 499.99,
     },
   });
+};
+
+exports.update = (req, res) => {
+  const { loanId } = req.params;
+
+  if (loanId.trim() !== '' && loanId.trim() !== null && (loans.some(loan => loan.id === Number(loanId)))) {
+    const specificLoan = loans.find(loan => Number(loanId) === loan.id);
+
+    if (!('status' in req.body)) {
+      res.status(422).json({
+        status: 422,
+        error: 'The status field is required',
+      });
+
+      return;
+    }
+
+    res.status(200).json({
+      status: 200,
+      data: {
+        loanId: specificLoan.id,
+        loanAmount: specificLoan.amount,
+        tenor: specificLoan.tenor,
+        status: req.body.status, // approved or rejected
+        monthlyInstallment: specificLoan.paymentInstallment,
+        interest: specificLoan.interest,
+      },
+    });
+  } else {
+    res.status(404).json({
+      status: 404,
+      error: 'record not found',
+    });
+  }
 };
