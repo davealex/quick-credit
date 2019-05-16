@@ -71,6 +71,15 @@ exports.index = (req, res) => {
           data: paidLoans,
         });
     }
+
+    if (req.query.status === 'approved' && req.query.repaid === 'false') {
+      const paidLoans = loans.filter(paid => paid.status === 'approved' && paid.repaid === false);
+      return res.status(200)
+        .json({
+          status: 200,
+          data: paidLoans,
+        });
+    }
   }
 
   return res.status(200).json({
