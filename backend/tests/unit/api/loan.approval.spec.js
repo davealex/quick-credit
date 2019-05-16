@@ -39,8 +39,7 @@ describe('Admin Loan Application Approval', () => {
     chai.request(app).patch(`/api/v1/loans/${loanApplication.id}`)
       .send(status)
       .then((res) => {
-        expect(res).to.have.status(404);
-        expect(res.body.error.length).to.be.greaterThan(0);
+        expect(res).to.have.status(422);
         done();
       })
       .catch(err => logger.error({ message: err.message }));

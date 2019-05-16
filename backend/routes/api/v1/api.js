@@ -276,5 +276,25 @@ routerV1.get('/loans/:loanId/repayments', Loan.repayments);
  */
 routerV1.patch('/loans/:loanId', Loan.update);
 
+// admin can post a loan repayment
+/**
+ * @swagger
+ *
+ * /api/v1/loans/<:loanId/repayment>:
+ *   post:
+ *     description: post a loan repayment
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: loanId
+ *         description: loan Id.
+ *         in: url
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: loan repayment posted
+ */
+routerV1.post('/loans/:loanId/repayment', Loan.createRepayment);
 
 module.exports = routerV1;

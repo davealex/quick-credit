@@ -35,4 +35,10 @@ module.exports = [
     loanId: 22,
     amount: '1,751.24',
   },
+  {
+    id: 29,
+    createdOn: '2017-07-15T02:29:51',
+    loanId: 22,
+    amount: '2,751.24',
+  },
 ];
