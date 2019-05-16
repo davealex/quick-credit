@@ -229,4 +229,30 @@ routerV1.get('/loans/:loanId/repayments', Loan.repayments);
  */
 // routerV1.get('/loans?status=approved&repaid=true', Loan.repaid);
 
+// view user repaid loans
+/**
+ * @swagger
+ *
+ * /api/v1/loans?status=approved&repaid=false:
+ *   get:
+ *     description: view user repaid loans
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: status
+ *         description: loan application status.
+ *         in: url
+ *         required: true
+ *         type: string
+ *       - name: repaid
+ *         description: loan repayment status.
+ *         in: url
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: view user repaid loans
+ */
+// routerV1.get('/loans?status=approved&repaid=false', Loan.repaid);
+
 module.exports = routerV1;
