@@ -227,25 +227,25 @@ routerV1.get('/loans/:loanId/repayments', Loan.repayments);
  *       200:
  *         description: view user repaid loans
  */
-// routerV1.get('/loans?status=approved&repaid=true', Loan.repaid);
+// routerV1.get('/loans?status=approved&repaid=true', Loan.index);
 
-// view user repaid loans
+// view user current loans
 /**
  * @swagger
  *
  * /api/v1/loans?status=approved&repaid=false:
  *   get:
- *     description: view user repaid loans
+ *     description: view user current loans
  *     produces:
  *       - application/json
  *     parameters:
  *       - name: status
- *         description: loan application status.
+ *         description: loan application status
  *         in: url
  *         required: true
  *         type: string
  *       - name: repaid
- *         description: loan repayment status.
+ *         description: loan repayment status
  *         in: url
  *         required: true
  *         type: string
@@ -253,6 +253,28 @@ routerV1.get('/loans/:loanId/repayments', Loan.repayments);
  *       200:
  *         description: view user repaid loans
  */
-// routerV1.get('/loans?status=approved&repaid=false', Loan.repaid);
+// routerV1.get('/loans?status=approved&repaid=false', Loan.index);
+
+// approve/reject a loan application
+/**
+ * @swagger
+ *
+ * /api/v1/loans/<:loanId>:
+ *   patch:
+ *     description: approve/reject a loan application
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: loanId
+ *         description: loan Id.
+ *         in: url
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: view user repaid loans
+ */
+routerV1.patch('/loans/:loanId', Loan.update);
+
 
 module.exports = routerV1;
