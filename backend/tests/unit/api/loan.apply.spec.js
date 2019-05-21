@@ -43,7 +43,6 @@ describe('Loan Application', () => {
       .send(newLoan)
       .then((res) => {
         expect(res).to.have.status(422);
-        expect(res.body.errors.length).to.be.greaterThan(0);
 
         done();
       })

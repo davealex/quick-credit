@@ -17,7 +17,7 @@ income earners.
   - Roles and privileges
   - Loan management system
   
-### Resources
+### Assets
 
 Some of the amazing resources used so far in this project:
 
@@ -28,12 +28,24 @@ Some of the amazing resources used so far in this project:
 
 ### Font(s)
 
-Inconsolata
+* Inconsolata
 
-### Links
+### Resources
+
+* [Email using regular expressions](https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript)
+* [Table filter/search](https://www.w3schools.com/howto/howto_js_filter_table.asp)
+* [List filter/search](https://www.w3schools.com/howto/howto_js_filter_lists.asp)
+* [Responsive HTML table](https://codepen.io/AllThingsSmitty/pen/MyqmdM)
+* [CSS steppers](https://codepen.io/thdeux/pen/zBGNrM)
+* [CSS dropdown menu](https://css-tricks.com/solved-with-css-dropdown-menus/)
+
+
+### Project Links
 
 * [Pivotal](https://www.pivotaltracker.com/n/projects/2327055)
 * [Github Pages](https://davealex.github.io/quick-credit/UI/)
+* [API](https://quick-credit-apis.herokuapp.com/)
+* [Docs](https://quick-credit-apis.herokuapp.com/api/v1/documentation/)
 
 ### Licence
 

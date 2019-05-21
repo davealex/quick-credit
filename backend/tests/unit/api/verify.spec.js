@@ -3,6 +3,9 @@ const chai = require('chai');
 const { expect } = require('chai');
 const chaiHttp = require('chai-http');
 const logger = require('../../../config/winston');
+const {
+  hash,
+} = require('../../../util/helpers');
 
 const app = require('../../../src/server');
 
@@ -12,9 +15,15 @@ chai.use(chaiHttp);
 describe('User verification ', () => {
   it('Should verify a user\'s email', (done) => {
     const user = {
-      email: 'daveabiola@gmail.com',
-      firstName: 'James',
-      lastName: 'Bond',
+      id: 2,
+      email: 'ninagordon@satiance.com',
+      firstName: 'Cantu',
+      lastName: 'Williamson',
+      password: hash('myPassword2'),
+      homeAddress: '920 Poplar Avenue, Kempton, Nevada, 7807',
+      workAddress: '257 John Street, Woodruff, Pennsylvania, 9834',
+      status: 'unverified',
+      isAdmin: false,
     };
 
     chai.request(app).patch(`/api/v1/users/${user.email}/verify`)

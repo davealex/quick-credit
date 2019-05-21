@@ -22,11 +22,9 @@ exports.signUp = (req, res) => {
     });
     return;
   }
-  let id = 0;
-  id += 1;
   const data = {
     token: generateToken(req.body.email),
-    id,
+    id: 1,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -81,21 +79,27 @@ exports.signIn = (req, res) => {
 };
 
 exports.verify = (req, res) => {
-  const userEmail = req.params.email;
+  const { email } = req.params;
 
-  if (!validateEmail(userEmail)) {
+  if (!validateEmail(email)) {
     return res.status(401).json({
       status: 401,
       error: 'The email address is invalid',
     });
   }
 
+  const authUser = users.find(user => user.email === email);
+
+  const {
+    firstName, lastName,
+  } = authUser;
+
   return res.status(200).json({
     status: 200,
     data: {
-      email: userEmail,
-      firstName: 'James',
-      lastName: 'Bond',
+      email,
+      firstName,
+      lastName,
       status: 'verified',
     },
   });
