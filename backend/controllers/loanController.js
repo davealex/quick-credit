@@ -1,24 +1,20 @@
 const loans = require('../seeds/loans');
 const compute = require('../util/loanComputedValues');
+const {
+  validateRequiredFields,
+} = require('../util/helpers');
 
 exports.store = (req, res) => {
-  const errors = [];
-  const expectedValue = ['firstName', 'lastName', 'email', 'tenor', 'amount'];
+  const error = [];
+  const expectedValues = ['firstName', 'lastName', 'email', 'tenor', 'amount'];
 
-  expectedValue.forEach((value) => {
-    if (!(value in req.body)) {
-      errors.push({
-        [value]: `The ${value} field is required`,
-      });
-    }
-  });
+  validateRequiredFields(expectedValues, req.body, error);
 
-  if (errors.length > 0) {
+  if (error.length > 0) {
     res.status(422).json({
       status: 422,
-      errors,
+      error,
     });
-
     return;
   }
 
@@ -105,21 +101,15 @@ exports.repayments = (req, res) => {
 exports.update = (req, res) => {
   const { loanId } = req.params;
 
-  const errors = [];
+  const error = [];
   const expectedValue = ['status'];
 
-  expectedValue.forEach((value) => {
-    if (!(value in req.body)) {
-      errors.push({
-        [value]: `The ${value} field is required`,
-      });
-    }
-  });
+  validateRequiredFields(expectedValue, req.body, error);
 
-  if (errors.length > 0) {
+  if (error.length > 0) {
     res.status(422).json({
       status: 422,
-      errors,
+      error,
     });
 
     return;
@@ -161,13 +151,7 @@ exports.createRepayment = (req, res) => {
   const error = [];
   const expectedValue = ['loanId', 'amount'];
 
-  expectedValue.forEach((value) => {
-    if (!(value.trim() in req.body) || value.trim() === '' || value.trim() === null) {
-      error.push({
-        [value]: `The ${value} field is required`,
-      });
-    }
-  });
+  validateRequiredFields(expectedValue, req.body, error);
 
   if (error.length > 0) {
     res.status(422).json({
@@ -189,7 +173,7 @@ exports.createRepayment = (req, res) => {
         amount: specificLoan.amount,
         monthlyInstallment: specificLoan.paymentInstallment,
         paidAmount: req.body.paidAmount,
-        balance: req.body.balance,
+        balance: specificLoan.balance - req.body.balance,
       },
     });
   }
