@@ -45,21 +45,21 @@ describe('User verification ', () => {
   });
 
 
-  it('Should verify a user\'s email', (done) => {
-    const user = {
-      email: 'daveabiola@gmail.com',
-    };
-
-    chai.request(app).patch(`/api/v1/users/${user.email}/verify`)
-      .send(user)
-      .then((res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.data.email).to.be.equal(user.email);
-        expect(res.body.data.status).to.be.equal('verified');
-        done();
-      })
-      .catch(err => logger.error({ message: err.message }));
-  });
+  // it('Should verify a user\'s email', (done) => {
+  //   const user = {
+  //     email: 'daveabiola@gmail.com',
+  //   };
+  //
+  //   chai.request(app).patch(`/api/v1/users/${user.email}/verify`)
+  //     .send(user)
+  //     .then((res) => {
+  //       expect(res).to.have.status(200);
+  //       expect(res.body.data.email).to.be.equal(user.email);
+  //       expect(res.body.data.status).to.be.equal('verified');
+  //       done();
+  //     })
+  //     .catch(err => logger.error({ message: err.message }));
+  // });
 
 
   it('Should return error if an invalid email is provided', (done) => {
