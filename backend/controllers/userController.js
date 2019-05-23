@@ -96,10 +96,16 @@ exports.signIn = (req, res) => {
 
   db.query(text, [req.body.email.trim()])
     .then((resp) => {
-      const data = {
-        token: generateToken(req.body.email),
-        ...resp.rows[0],
-      };
+      // const data = {
+      //   token: generateToken(req.body.email),
+      //   ...resp.rows[0],
+      // };
+      //
+      // console.log(data);
+      //
+      // return;
+
+      const data = resp.rows[0];
 
       if (!data) {
         return res.status(403).json({
@@ -116,6 +122,7 @@ exports.signIn = (req, res) => {
       }
 
       delete data.password;
+      data.token = generateToken(req.body.email);
 
       return res.status(200).json({
         status: 200,
