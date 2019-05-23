@@ -8,11 +8,6 @@ const app = require('../../../src/server');
 
 chai.use(chaiHttp);
 
-const { seed } = require('../../../seeds/repayments');
-
-seed();
-
-
 describe('All Loans', () => {
   it('Should get loan repayment history ', (done) => {
     const loanHistory = {
