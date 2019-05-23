@@ -177,35 +177,53 @@ exports.update = (req, res) => {
     return;
   }
 
-  if (loanId.trim() !== '' && loanId.trim() !== null && (loans.some(loan => loan.id === Number(loanId)))) {
-    const specificLoan = loans.find(loan => Number(loanId) === loan.id);
+  // find loan
+  let loan;
+  const findOneQuery = 'SELECT * FROM loans WHERE id=$1';
+  db.query(findOneQuery, [loanId.trim()])
+    .then((resp) => {
+      [loan] = resp.rows;
+      if (!loan) {
+        return res.status(404).json({
+          status: 404,
+          error: 'record not found',
+        });
+      }
+    }).catch(err => res.status(400).json({
+      status: 400,
+      error: err,
+    }));
 
-    if (!('status' in req.body)) {
-      res.status(422).json({
-        status: 422,
-        error: 'Invalid input value',
+  // update loan
+  const updateOneQuery = `UPDATE loans
+      SET status=$1, updated_at=$2
+      WHERE id=$3 returning *`;
+  const values = [
+    req.body.status.trim(),
+    new Date(),
+    loanId.trim(),
+  ];
+
+  db.query(updateOneQuery, values)
+    .then((resp) => {
+      [loan] = resp.rows;
+
+      return res.status(200).json({
+        status: 200,
+        data: {
+          loanId: loan.id,
+          loanAmount: loan.amount,
+          tenor: loan.tenor,
+          status: loan.status,
+          monthlyInstallment: loan.paymentinstallment,
+          interest: loan.interest,
+          balance: loan.balance,
+        },
       });
-
-      return;
-    }
-
-    res.status(200).json({
-      status: 200,
-      data: {
-        loanId: specificLoan.id,
-        loanAmount: specificLoan.amount,
-        tenor: specificLoan.tenor,
-        status: req.body.status, // approved or rejected
-        monthlyInstallment: specificLoan.paymentInstallment,
-        interest: specificLoan.interest,
-      },
-    });
-  } else {
-    res.status(404).json({
-      status: 404,
-      error: 'record not found',
-    });
-  }
+    }).catch(err => res.status(400).json({
+      status: 400,
+      error: err,
+    }));
 };
 
 exports.createRepayment = (req, res) => {
