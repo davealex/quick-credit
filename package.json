@@ -10,7 +10,7 @@
     "build": "babel ./backend/src --out-dir ./backend/dist --source-maps",
     "dev": "npm run build && nodemon --exec babel-node ./backend/src/server.js",
     "serve": "node ./backend/dist/server.js",
-    "test": "mocha ./backend/tests/**/*.spec.js --timeout 10000 --exit",
+    "test": "mocha ./backend/tests/**/*.spec.js --timeout 20000 --exit",
     "debug": "node --inspect-brk ./backend/dist/server.js",
     "lint": "eslint ./backend --fix",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
