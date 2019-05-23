@@ -1,6 +1,6 @@
 const moment = require('moment');
 const uuidv4 = require('uuid/v4');
-const users = require('../seeds/users');
+// const users = require('../seeds/users');
 const logger = require('../config/winston');
 const db = require('../database/connect');
 const {
@@ -131,7 +131,7 @@ exports.signIn = (req, res) => {
     });
 };
 
-exports.verify = (req, res) => {
+exports.verifyUser = (req, res) => {
   const { email } = req.params;
 
   if (!validateEmail(email)) {
@@ -141,19 +141,50 @@ exports.verify = (req, res) => {
     });
   }
 
-  const authUser = users.find(user => user.email === email);
+  // find user
+  let user;
+  const text = 'SELECT * FROM users WHERE email = $1';
+  db.query(text, [email.trim()])
+    .then((resp) => {
+      [user] = resp.rows;
+      // console.log(user);
+      if (!user) {
+        return res.status(403).json({
+          status: 403,
+          error: 'Invalid email.',
+        });
+      }
+    })
+    .catch(err => res.status(400).json({
+      status: 400,
+      error: err,
+    }));
 
-  const {
-    firstName, lastName,
-  } = authUser;
+  // update user status
+  const updateOneQuery = `UPDATE users
+      SET status=$1, updated_at=$2
+      WHERE email=$3 returning *`;
+  const values = [
+    'verified',
+    new Date(),
+    email,
+  ];
 
-  return res.status(200).json({
-    status: 200,
-    data: {
-      email,
-      firstName,
-      lastName,
-      status: 'verified',
-    },
-  });
+  db.query(updateOneQuery, values)
+    .then((resp) => {
+      [user] = resp.rows;
+
+      return res.status(200).json({
+        status: 200,
+        data: {
+          email,
+          firstName: user.firstname,
+          lastName: user.lastname,
+          status: user.status,
+        },
+      });
+    }).catch(err => res.status(400).json({
+      status: 400,
+      error: err,
+    }));
 };
