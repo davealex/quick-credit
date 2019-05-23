@@ -1,4 +1,4 @@
-const { describe } = require('mocha');
+// const { describe } = require('mocha');
 const chai = require('chai');
 const { expect } = require('chai');
 const chaiHttp = require('chai-http');
@@ -7,7 +7,6 @@ const logger = require('../../../config/winston');
 const app = require('../../../src/server');
 
 chai.use(chaiHttp);
-
 
 describe('All Current Loans', () => {
   it('Should get all approved and unpaid loans', (done) => {
