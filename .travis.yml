@@ -10,11 +10,15 @@ env:
     - NODE_ENV=test
 node_js:
  - "8.12.0"
+services:
+ - postgresql
 before_script:
   - yarn global add nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  - psql -U postgres -c 'CREATE DATABASE "test_db";'
+  - psql -U postgres -f ./db/create-tables.sql -d test_db
 script:
  - npm run coveralls
  - npm run coverage

@@ -10,7 +10,7 @@
     "build": "babel ./backend/src --out-dir ./backend/dist --source-maps",
     "dev": "npm run build && nodemon --exec babel-node ./backend/src/server.js",
     "serve": "node ./backend/dist/server.js",
-    "test": "mocha --exit ./backend/tests/**/*.spec.js",
+    "test": "mocha ./backend/tests/**/*.spec.js --timeout 10000 --exit",
     "debug": "node --inspect-brk ./backend/dist/server.js",
     "lint": "eslint ./backend --fix",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -41,11 +41,13 @@
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.5.6",
     "npm-run-all": "^4.1.5",
     "pg": "^7.11.0",
     "swagger-jsdoc": "^3.2.9",
     "swagger-ui-express": "^4.0.2",
+    "uuid": "^3.3.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {
