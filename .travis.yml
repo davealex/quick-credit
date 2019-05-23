@@ -19,7 +19,7 @@ before_script:
   - ./cc-test-reporter before-build
   - psql -c 'create database travis_ci_test;' -U postgres
 script:
- - npm run node ./backend/database/db.js
+ - node ./backend/database/db.js
  - npm run coveralls
  - npm run coverage
 after_script:
