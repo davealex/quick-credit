@@ -1,4 +1,4 @@
-const { describe } = require('mocha');
+// const { describe } = require('mocha');
 const chai = require('chai');
 const { expect } = require('chai');
 const chaiHttp = require('chai-http');
@@ -13,11 +13,9 @@ describe('Loan Application', () => {
   it('Should be able to apply for a loan', (done) => {
     // mock valid user input
     const newLoan = {
-      firstName: 'Dave',
-      lastName: 'Snowden',
-      email: 'john@wick.com',
+      email: 'james@email.com',
       tenor: 12,
-      amount: 15000,
+      amount: 15000.10,
     };
 
     // send request to the app
@@ -25,8 +23,6 @@ describe('Loan Application', () => {
       .send(newLoan)
       .then((res) => {
         expect(res).to.have.status(201);
-        expect(res.body.data.firstName).to.be.equal(newLoan.firstName);
-        expect(res.body.data.lastName).to.be.equal(newLoan.lastName);
         expect(res.body.data.email).to.be.equal(newLoan.email);
         expect(res.body.data.tenor).to.be.equal(newLoan.tenor);
         expect(res.body.data.amount).to.be.equal(newLoan.amount);
@@ -43,6 +39,7 @@ describe('Loan Application', () => {
       .send(newLoan)
       .then((res) => {
         expect(res).to.have.status(422);
+        // expect(res.body.errors.length).to.be.greaterThan(0);
 
         done();
       })

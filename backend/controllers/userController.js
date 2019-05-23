@@ -96,15 +96,6 @@ exports.signIn = (req, res) => {
 
   db.query(text, [req.body.email.trim()])
     .then((resp) => {
-      // const data = {
-      //   token: generateToken(req.body.email),
-      //   ...resp.rows[0],
-      // };
-      //
-      // console.log(data);
-      //
-      // return;
-
       const data = resp.rows[0];
 
       if (!data) {
@@ -115,6 +106,7 @@ exports.signIn = (req, res) => {
       }
 
       if (!compare(req.body.password, data.password)) {
+        // console.log('invalid password')
         res.status(400).json({
           status: 400,
           error: 'Invalid password provided.',
@@ -130,6 +122,7 @@ exports.signIn = (req, res) => {
       });
     })
     .catch((err) => {
+      // console.log(err);
       logger.error({ message: err.message });
       return res.status(400).json({
         status: 400,

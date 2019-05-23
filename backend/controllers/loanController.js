@@ -1,12 +1,15 @@
+const uuidv4 = require('uuid/v4');
+const db = require('../database/connect');
 const loans = require('../seeds/loans');
 const compute = require('../util/loanComputedValues');
+const logger = require('../config/winston');
 const {
   validateRequiredFields,
 } = require('../util/helpers');
 
-exports.store = (req, res) => {
+exports.applyForLoan = (req, res) => {
   const error = [];
-  const expectedValues = ['firstName', 'lastName', 'email', 'tenor', 'amount'];
+  const expectedValues = ['email', 'tenor', 'amount'];
 
   validateRequiredFields(expectedValues, req.body, error);
 
@@ -18,25 +21,71 @@ exports.store = (req, res) => {
     return;
   }
 
-  const {
-    firstName, lastName, email, tenor, amount,
-  } = req.body;
+  // find user
+  let user;
+  db.query('SELECT * FROM users WHERE email = $1', [req.body.email])
+    .then((resp) => {
+      [user] = resp.rows;
+      // console.log(user)
+      if (user) logger.error({ message: user });
+      return res.status(400).json({
+        status: 400,
+        error: 'User with email not found.',
+      });
+      // return user;
+    }).catch((err) => {
+      res.status(400).json({
+        status: 400,
+        error: err,
+      });
+    });
 
-  res.status(201).json({
-    status: 201,
-    data: {
-      loanId: 2,
-      firstName,
-      lastName,
-      email,
-      tenor,
-      amount,
-      paymentInstallment: compute.installment(amount, 5, tenor),
-      status: 'pending',
-      balance: compute.balance(amount, 5),
-      interest: compute.interest(5, amount),
-    },
-  });
+  const { amount, tenor } = req.body;
+
+  const text = `INSERT INTO
+      loans(id, email, repaid, tenor, amount, paymentinstallment, status, balance, interest, created_at, updated_at)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      returning *`;
+
+  const values = [
+    uuidv4(),
+    req.body.email,
+    false,
+    req.body.tenor,
+    req.body.amount,
+    compute.installment(amount, 5, tenor),
+    'pending',
+    compute.balance(amount, 5),
+    compute.balance(5, amount),
+    new Date(),
+    new Date(),
+  ];
+
+  db.query(text, values)
+    .then((resp) => {
+      const data = resp.rows[0];
+
+      return res.status(201).json({
+        status: 201,
+        data: {
+          loanId: data.id,
+          firstName: user.firstname,
+          lastName: user.lastname,
+          email: user.email,
+          tenor: data.tenor,
+          amount: Number(data.amount),
+          paymentInstallment: data.paymentinstallment,
+          status: data.status,
+          balance: data.balance,
+          interest: data.interest,
+          repaid: data.repaid,
+        },
+      });
+    })
+    .catch(err => res.status(400).json({
+      status: 400,
+      errors: err,
+    }));
 };
 
 exports.show = (req, res) => {

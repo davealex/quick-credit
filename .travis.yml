@@ -20,6 +20,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 script:
  - node ./backend/database/db.js
+ - node ./backend/seeds/seedTestData.js
  - npm run coveralls
  - npm run coverage
 after_script:
