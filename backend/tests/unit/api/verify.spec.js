@@ -69,7 +69,7 @@ describe('User verification ', () => {
       lastName: 'Bond',
     };
 
-    chai.request(app).patch(`/api/v1/users/${user.email}/verify`).set('is_admin', true)
+    chai.request(app).patch(`/api/v1/users/${user.email}/verify`)
       .send(user)
       .then((res) => {
         expect(res).to.have.status(401);
