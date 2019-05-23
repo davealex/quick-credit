@@ -1,12 +1,19 @@
 const moment = require('moment');
 const uuidv4 = require('uuid/v4');
 const users = require('../seeds/users');
-// const logger = require('../config/winston');
+const logger = require('../config/winston');
 const db = require('../database/connect');
 const {
   hash, generateToken, validateEmail, compare, validateRequiredFields,
 } = require('../util/helpers');
 
+/**
+ * Sign up
+ *
+ *
+ * @param req
+ * @param res
+ */
 exports.signUp = (req, res) => {
   const { email, password, confirmPassword } = req.body;
   const expectedValues = ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'address'];
@@ -28,7 +35,7 @@ exports.signUp = (req, res) => {
   }
 
   const text = `INSERT INTO
-      users( id, email, firstname, lastname, password, address, status, is_admin, created_at, updated_at)
+      users(id, email, firstname, lastname, password, address, status, is_admin, created_at, updated_at)
       VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       returning *`;
 
@@ -61,6 +68,13 @@ exports.signUp = (req, res) => {
     .catch(err => res.status(400).send(err));
 };
 
+/**
+ * Sign in
+ *
+ *
+ * @param req
+ * @param res
+ */
 exports.signIn = (req, res) => {
   const error = [];
   const expectedValues = ['email', 'password'];
@@ -78,26 +92,43 @@ exports.signIn = (req, res) => {
   }
 
   // authenticated user
-  const authUser = users
-    .filter(user => user.email === req.body.email && compare(req.body.password, user.password));
+  const text = 'SELECT * FROM users WHERE email = $1';
 
-  if (authUser === [] || authUser[0] === undefined) {
-    res.status(403).json({
-      status: 403,
-      error: 'Invalid username or password',
+  db.query(text, [req.body.email.trim()])
+    .then((resp) => {
+      const data = {
+        token: generateToken(req.body.email),
+        ...resp.rows[0],
+      };
+
+      if (!data) {
+        return res.status(403).json({
+          status: 403,
+          error: 'Invalid credentials.',
+        });
+      }
+
+      if (!compare(req.body.password, data.password)) {
+        res.status(400).json({
+          status: 400,
+          error: 'Invalid password provided.',
+        });
+      }
+
+      delete data.password;
+
+      return res.status(200).json({
+        status: 200,
+        data,
+      });
+    })
+    .catch((err) => {
+      logger.error({ message: err.message });
+      return res.status(400).json({
+        status: 400,
+        error: err,
+      });
     });
-  } else {
-    res.status(200).json({
-      status: 200,
-      data: {
-        token: generateToken(authUser[0].email),
-        id: authUser[0].id,
-        firstName: authUser[0].firstName,
-        lastName: authUser[0].lastName,
-        email: authUser[0].email,
-      },
-    });
-  }
 };
 
 exports.verify = (req, res) => {
