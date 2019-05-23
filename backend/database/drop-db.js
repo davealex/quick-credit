@@ -4,6 +4,7 @@ const { DATABASE_URL } = require('../config/app');
 
 const db = new Pool({
   connectionString: DATABASE_URL,
+  ssl: true,
 });
 
 /**

@@ -3,7 +3,9 @@ const logger = require('../config/winston');
 const { DATABASE_URL } = require('../config/app');
 
 const db = new Pool({
+  // connectionString: process.env.NODE_ENV === 'test' ? TEST_DB_URL : DATABASE_URL,
   connectionString: DATABASE_URL,
+  ssl: true,
 });
 
 db.on('connect', () => {
@@ -16,9 +18,9 @@ db.on('connect', () => {
 const createLoansTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
       loans(
-        id SERIAL PRIMARY KEY,
-        status VARCHAR(128) NOT NULL,
+        id UUID PRIMARY KEY,
         email VARCHAR(128) NOT NULL,
+        status VARCHAR(128) NOT NULL,
         repaid BOOLEAN NOT NULL,
         amount NUMERIC NOT NULL,
         balance VARCHAR(128) NOT NULL,
@@ -46,7 +48,7 @@ const createLoansTable = () => {
 const createRepaymentTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
       repayments(
-        id SERIAL PRIMARY KEY,
+        id UUID PRIMARY KEY,
         loanId INT NOT NULL,
         amount NUMERIC NOT NULL,
         created_at TIMESTAMP,
@@ -70,14 +72,14 @@ const createRepaymentTable = () => {
 const createUserTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
       users(
-        id SERIAL PRIMARY KEY,
+        id UUID PRIMARY KEY,
         email VARCHAR(128) UNIQUE NOT NULL,
-        status VARCHAR(128) NOT NULL DEFAULT 'unverified',
-        password VARCHAR(128) NOT NULL,
         firstName VARCHAR(128) NOT NULL,
         lastName VARCHAR(128) NOT NULL,
-        homeAddress VARCHAR(128) NOT NULL,
-        workAddress VARCHAR(128) NOT NULL,
+        password VARCHAR(128) NOT NULL,
+        address VARCHAR(128) NOT NULL,
+        status VARCHAR(128) NOT NULL DEFAULT 'unverified',
+        is_admin VARCHAR(128) NOT NULL DEFAULT false,
         created_at TIMESTAMP,
         updated_at TIMESTAMP
       )`;
@@ -92,7 +94,6 @@ const createUserTable = () => {
       db.end();
     });
 };
-
 
 createLoansTable();
 createUserTable();

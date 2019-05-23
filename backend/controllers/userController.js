@@ -1,11 +1,15 @@
+const moment = require('moment');
+const uuidv4 = require('uuid/v4');
 const users = require('../seeds/users');
+// const logger = require('../config/winston');
+const db = require('../database/connect');
 const {
-  generateToken, validateEmail, compare, validateRequiredFields,
+  hash, generateToken, validateEmail, compare, validateRequiredFields,
 } = require('../util/helpers');
 
 exports.signUp = (req, res) => {
   const { email, password, confirmPassword } = req.body;
-  const expectedValues = ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'homeAddress', 'workAddress'];
+  const expectedValues = ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'address'];
   const error = [];
 
   // required fields validation
@@ -22,21 +26,39 @@ exports.signUp = (req, res) => {
     });
     return;
   }
-  const data = {
-    token: generateToken(req.body.email),
-    id: 1,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    homeAddress: req.body.homeAddress,
-    workAddress: req.body.workAddress,
 
-  };
+  const text = `INSERT INTO
+      users( id, email, firstname, lastname, password, address, status, is_admin, created_at, updated_at)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      returning *`;
 
-  res.status(201).json({
-    status: 201,
-    data,
-  });
+  const values = [
+    uuidv4(),
+    req.body.email,
+    req.body.firstName,
+    req.body.lastName,
+    hash(req.body.password),
+    req.body.address,
+    'unverified',
+    false,
+    moment(),
+    moment(),
+  ];
+
+  db.query(text, values)
+    .then((resp) => {
+      const data = {
+        token: generateToken(req.body.email),
+        ...resp.rows[0],
+      };
+
+      delete data.password;
+      return res.status(201).json({
+        status: 201,
+        data,
+      });
+    })
+    .catch(err => res.status(400).send(err));
 };
 
 exports.signIn = (req, res) => {
