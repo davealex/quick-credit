@@ -14,7 +14,7 @@ const { hash } = require('./../../../util/helpers');
 
 function setUpUser() {
   const text = `INSERT INTO
-        users(id, email, password, address, status, is_admin, created_at, updated_at)
+        users(id, email, firstname, lastname, password, address, status, is_admin, created_at, updated_at)
         VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         returning *`;
 
