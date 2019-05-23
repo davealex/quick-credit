@@ -242,24 +242,55 @@ exports.createRepayment = (req, res) => {
     return;
   }
 
-  if (loans.some(loan => loan.id === Number(loanId))) {
-    const specificLoan = loans.find(loan => Number(loanId) === loan.id);
-    res.status(200).json({
-      status: 200,
-      data: {
-        id: 2,
-        loanId: Number(specificLoan.id),
-        createdOn: new Date().getTime(),
-        amount: specificLoan.amount,
-        monthlyInstallment: specificLoan.paymentInstallment,
-        paidAmount: req.body.paidAmount,
-        balance: specificLoan.balance - req.body.balance,
-      },
-    });
-  }
+  // find loan
+  let loan;
+  const findOneQuery = 'SELECT * FROM loans WHERE id=$1';
+  db.query(findOneQuery, [loanId.trim()])
+    .then((resp) => {
+      [loan] = resp.rows;
+      // console.log('loan is:', loan);
+      if (!loan) {
+        return res.status(404).json({
+          status: 404,
+          error: 'record not found',
+        });
+      }
+    }).catch(err => res.status(400).json({
+      status: 400,
+      error: err,
+    }));
 
-  res.status(404).json({
-    status: 404,
-    error: 'record not found',
-  });
+  // create repayment for loan
+  const text = `INSERT INTO
+      repayments(amount, loanId, created_at, updated_at)
+      VALUES($1, $2, $3, $4)
+      returning *`;
+
+  const values = [
+    req.body.amount,
+    loanId.trim(),
+    new Date(),
+    new Date(),
+  ];
+
+  db.query(text, values)
+    .then((resp) => {
+      const data = resp.rows[0];
+
+      return res.status(201).json({
+        status: 201,
+        data: {
+          loanId: data.loanId,
+          createdOn: data.created_at,
+          amount: loan.amount,
+          monthlyInstallment: loan.paymentinstallment,
+          paidAmount: data.amount,
+          balance: loan.balance,
+        },
+      });
+    })
+    .catch(err => res.status(404).json({
+      status: 404,
+      error: err,
+    }));
 };
