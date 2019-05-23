@@ -108,29 +108,38 @@ exports.show = (req, res) => {
 
 exports.index = (req, res) => {
   if (Object.prototype.hasOwnProperty.call(req.query, 'status') && Object.prototype.hasOwnProperty.call(req.query, 'repaid')) {
-    if (req.query.status === 'approved' && req.query.repaid === 'true') {
-      const paidLoans = loans.filter(paid => paid.status === 'approved' && paid.repaid === true);
-      return res.status(200)
-        .json({
-          status: 200,
-          data: paidLoans,
-        });
-    }
+    const findQuery = 'SELECT * FROM loans WHERE status= $1 AND repaid= $2';
+    db.query(findQuery, [req.query.status.trim(), req.query.repaid])
+      .then((resp) => {
+        const data = resp.rows;
 
-    if (req.query.status === 'approved' && req.query.repaid === 'false') {
-      const currentLoans = loans.filter(paid => paid.status === 'approved' && paid.repaid === false);
-      return res.status(200)
-        .json({
-          status: 200,
-          data: currentLoans,
+        return res.status(200).json({
+          status: 20023,
+          data,
         });
-    }
+      })
+      .catch(err => res.status(400).json({
+        status: 400,
+        error: err,
+      }));
+  } else {
+    const findQuery = 'SELECT * FROM loans';
+    db.query(findQuery)
+      .then((resp) => {
+        const data = resp.rows;
+
+        return res.status(200)
+          .json({
+            status: 200,
+            data,
+          });
+      })
+      .catch(err => res.status(400)
+        .json({
+          status: 400,
+          error: err,
+        }));
   }
-
-  return res.status(200).json({
-    status: 200,
-    data: loans,
-  });
 };
 
 exports.repayments = (req, res) => {
