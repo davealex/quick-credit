@@ -145,7 +145,7 @@ routerV1.patch('/users/:email/verify', User.verify);
  *       201:
  *         description: loan application
  */
-routerV1.post('/loans', Loan.store);
+routerV1.post('/loans', Loan.applyForLoan);
 
 // view specific loan
 /**

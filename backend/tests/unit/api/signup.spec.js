@@ -24,7 +24,7 @@ describe('User signup', () => {
   it('Should return 201 and confirmation of valid input', (done) => {
     // mock valid user input
     const newUser = {
-      email: 'james@email.com',
+      email: 'dave@email.com',
       firstName: 'James',
       lastName: 'Bond',
       password: 'myPassword',
