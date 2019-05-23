@@ -104,7 +104,7 @@ routerV1.post('/auth/signin', User.signIn);
  *         description: verify user
  */
 
-routerV1.patch('/users/:email/verify', User.verify);
+routerV1.patch('/users/:email/verify', User.verifyUser);
 
 // user loan application
 /**
