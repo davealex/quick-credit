@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 
 describe('All Loans', () => {
   it('Should get all loans', (done) => {
-    chai.request(app).get('/api/v1/loans').set('is_admin', true)
+    chai.request(app).get('/api/v1/loans')
       .then((res) => {
         expect(res).to.have.status(200);
 
