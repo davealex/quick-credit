@@ -3,11 +3,9 @@ const chai = require('chai');
 const { expect } = require('chai');
 const chaiHttp = require('chai-http');
 const logger = require('../../../config/winston');
-
 const app = require('../../../src/server');
 
 chai.use(chaiHttp);
-
 
 describe('All Repaid Loans', () => {
   it('Should get all approved and paid loans', (done) => {
