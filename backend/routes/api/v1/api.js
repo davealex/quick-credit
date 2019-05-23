@@ -5,6 +5,7 @@ const routerV1 = express.Router();
 const User = require('../../../controllers/userController');
 const Loan = require('../../../controllers/loanController');
 // const isAdmin = require('../../../middlewares/admin');
+// const isAuth = require('../../../middlewares/admin');
 
 // user signup endpoint
 /**
