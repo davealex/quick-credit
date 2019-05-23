@@ -136,15 +136,19 @@ exports.index = (req, res) => {
 exports.repayments = (req, res) => {
   const { loanId } = req.params;
 
-  return res.status(200).json({
-    status: 200,
-    data: {
-      loanId: Number(loanId),
-      createdOn: new Date(),
-      monthlyInstallment: 333.22,
-      amount: 499.99,
-    },
-  });
+  const findQuery = 'SELECT * FROM repayments WHERE loanid= $1';
+  db.query(findQuery, [loanId.trim()])
+    .then((resp) => {
+      const data = resp.rows;
+
+      return res.status(200).json({
+        status: 200,
+        data,
+      });
+    }).catch(err => res.status(400).json({
+      status: 400,
+      error: err,
+    }));
 };
 
 exports.update = (req, res) => {
