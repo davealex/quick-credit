@@ -1,10 +1,10 @@
 module.exports = (req, res, next) => {
-  if (!req.body.user || !req.body.user.is_admin) {
-    return res.status(403).send({
-      status: 403,
-      error: 'you must be logged in to use this app',
-    });
+  if (req.user.is_admin == 'true') {
+    return next();
   }
 
-  return next();
+  return res.status(403).send({
+    status: 403,
+    error: 'you don\'t have authorization.',
+  });
 };

@@ -33,7 +33,7 @@ app.use((req, res) => {
   res.status(404);
 
   // respond with json
-  if (req.accepts('json')) res.send({ status: 404, error: 'Oops...! Are you lost?' });
+  if (req.accepts('json')) res.send({ status: 404, error: 'Invalid route/URL' });
 });
 
 app.listen(PORT || 3000);

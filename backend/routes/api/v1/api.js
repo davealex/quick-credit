@@ -4,8 +4,10 @@ const routerV1 = express.Router();
 
 const User = require('../../../controllers/userController');
 const Loan = require('../../../controllers/loanController');
-// const isAdmin = require('../../../middlewares/admin');
-// const isAuth = require('../../../middlewares/admin');
+const isAdmin = require('../../../middlewares/admin');
+const isAuth = require('../../../middlewares/auth');
+const canTakeLoan = require('../../../middlewares/canTakeLoan');
+// const canTakeLoan = require('../../../middlewares/canTakeLoan');
 
 // user signup endpoint
 /**
@@ -104,7 +106,7 @@ routerV1.post('/auth/signin', User.signIn);
  *         description: verify user
  */
 
-routerV1.patch('/users/:email/verify', User.verifyUser);
+routerV1.patch('/users/:email/verify', [isAuth, isAdmin], User.verifyUser);
 
 // user loan application
 /**
@@ -145,7 +147,7 @@ routerV1.patch('/users/:email/verify', User.verifyUser);
  *       201:
  *         description: loan application
  */
-routerV1.post('/loans', Loan.applyForLoan);
+routerV1.post('/loans', [isAuth, canTakeLoan], Loan.applyForLoan);
 
 // view specific loan
 /**
@@ -166,7 +168,8 @@ routerV1.post('/loans', Loan.applyForLoan);
  *       200:
  *         description: view specific loan
  */
-routerV1.get('/loans/:loanId', Loan.show);
+routerV1.get('/loans/:loanId', [isAuth, isAdmin], Loan.showLoan);
+// routerV1.get('/loans/:loanId', [isAuth], Loan.showLoan);
 
 // view all loan applications
 /**
@@ -181,7 +184,7 @@ routerV1.get('/loans/:loanId', Loan.show);
  *       200:
  *         description: view specific loan
  */
-routerV1.get('/loans', Loan.index);
+routerV1.get('/loans', [isAuth, isAdmin], Loan.index);
 
 // view loan repayment history
 /**
@@ -202,7 +205,7 @@ routerV1.get('/loans', Loan.index);
  *       200:
  *         description: view loan repayment history
  */
-routerV1.get('/loans/:loanId/repayments', Loan.repayments);
+routerV1.get('/loans/:loanId/repayments', [isAuth, isAdmin], Loan.repayments);
 
 // view user repaid loans
 /**
@@ -275,7 +278,7 @@ routerV1.get('/loans/:loanId/repayments', Loan.repayments);
  *       200:
  *         description: view user repaid loans
  */
-routerV1.patch('/loans/:loanId', Loan.update);
+routerV1.patch('/loans/:loanId', [isAuth, isAdmin], Loan.update);
 
 // admin can post a loan repayment
 /**
@@ -296,6 +299,6 @@ routerV1.patch('/loans/:loanId', Loan.update);
  *       200:
  *         description: loan repayment posted
  */
-routerV1.post('/loans/:loanId/repayment', Loan.createRepayment);
+routerV1.post('/loans/:loanId/repayment', [isAuth, isAdmin], Loan.createRepayment);
 
 module.exports = routerV1;

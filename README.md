@@ -17,6 +17,20 @@ income earners.
   - Roles and privileges
   - Loan management system
   
+# Build
+- Node JS
+- Express JS
+- PostgreSQL (database)
+   
+# Start App
+   ```
+   npm install
+   create .env using the sample provided
+   
+   npm run start
+   ```
+  
+  
 ### Assets
 
 Some of the amazing resources used so far in this project:

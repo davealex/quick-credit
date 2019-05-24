@@ -17,6 +17,7 @@ describe('All Loans', () => {
 
         done();
       })
-      .catch(err => logger.error({ message: err.message }));
+      .catch(err => console.log(err));
+    // .catch(err => logger.error({ message: err.message }));
   });
 });
