@@ -4,12 +4,12 @@ const loans = require('../seeds/loans');
 const compute = require('../util/loanComputedValues');
 const logger = require('../config/winston');
 const {
-  validateRequiredFields,
+  validateRequiredFields, isNumeric, isAlpha,
 } = require('../util/helpers');
 
 exports.applyForLoan = (req, res) => {
   const error = [];
-  const expectedValues = ['email', 'tenor', 'amount'];
+  const expectedValues = ['tenor', 'amount'];
 
   validateRequiredFields(expectedValues, req.body, error);
 
@@ -21,26 +21,8 @@ exports.applyForLoan = (req, res) => {
     return;
   }
 
-  // find user
-  let user;
-  db.query('SELECT * FROM users WHERE email = $1', [req.body.email])
-    .then((resp) => {
-      [user] = resp.rows;
-      // console.log(user)
-      if (user) logger.error({ message: user });
-      return res.status(400).json({
-        status: 400,
-        error: 'User with email not found.',
-      });
-      // return user;
-    }).catch((err) => {
-      res.status(400).json({
-        status: 400,
-        error: err,
-      });
-    });
-
   const { amount, tenor } = req.body;
+  const user = req.user;
 
   const text = `INSERT INTO
       loans(id, email, repaid, tenor, amount, paymentinstallment, status, balance, interest, created_at, updated_at)
@@ -49,7 +31,7 @@ exports.applyForLoan = (req, res) => {
 
   const values = [
     uuidv4(),
-    req.body.email,
+    req.user.email,
     false,
     req.body.tenor,
     req.body.amount,
@@ -82,28 +64,43 @@ exports.applyForLoan = (req, res) => {
         },
       });
     })
-    .catch(err => res.status(400).json({
-      status: 400,
-      errors: err,
-    }));
+    .catch((err) => {
+      logger.error({ message: err.message });
+      return res.status(400).json({
+        status: 400,
+        error: 'Failed while applying for a loan.',
+      });
+    });
 };
 
-exports.show = (req, res) => {
+exports.showLoan = (req, res) => {
   const { loanId } = req.params;
 
-  if (loanId !== '' && loanId !== null && (loans.some(loan => loan.id === Number(loanId)))) {
-    const specificLoan = loans.find(loan => Number(loanId) === loan.id);
+  let loan;
+  const findOneQuery = 'SELECT * FROM loans WHERE id=$1';
+  db.query(findOneQuery, [loanId.trim()])
+    .then((resp) => {
+      [loan] = resp.rows;
+      // console.log('loan is:', loan);
+      if (!loan) {
+        return res.status(400).json({
+          status: 400,
+          error: 'Loan not found.',
+        });
+      }
 
-    return res.status(200).json({
-      status: 200,
-      data: specificLoan,
+      return res.status(200).json({
+        status: 200,
+        data: loan,
+      });
+    })
+    .catch((err) => {
+      logger.error({ message: err.message });
+      return res.status(400).json({
+        status: 400,
+        error: 'Loan not found.',
+      });
     });
-  }
-
-  return res.status(404).json({
-    status: 404,
-    error: 'record not found',
-  });
 };
 
 exports.index = (req, res) => {
@@ -114,7 +111,7 @@ exports.index = (req, res) => {
         const data = resp.rows;
 
         return res.status(200).json({
-          status: 20023,
+          status: 200,
           data,
         });
       })
@@ -134,11 +131,12 @@ exports.index = (req, res) => {
             data,
           });
       })
-      .catch(err => res.status(400)
-        .json({
+      .catch(
+        err => res.status(400).json({
           status: 400,
           error: err,
-        }));
+        }),
+      );
   }
 };
 
@@ -177,6 +175,16 @@ exports.update = (req, res) => {
     return;
   }
 
+  isAlpha(expectedValue, req.body, error);
+  if (error.length > 0) {
+    res.status(422).json({
+      status: 422,
+      error,
+    });
+
+    return;
+  }
+
   // find loan
   let loan;
   const findOneQuery = 'SELECT * FROM loans WHERE id=$1';
@@ -186,53 +194,70 @@ exports.update = (req, res) => {
       if (!loan) {
         return res.status(404).json({
           status: 404,
-          error: 'record not found',
+          error: 'loan not found',
         });
       }
-    }).catch(err => res.status(400).json({
-      status: 400,
-      error: err,
-    }));
 
-  // update loan
-  const updateOneQuery = `UPDATE loans
+      // update loan
+      const updateOneQuery = `UPDATE loans
       SET status=$1, updated_at=$2
       WHERE id=$3 returning *`;
-  const values = [
-    req.body.status.trim(),
-    new Date(),
-    loanId.trim(),
-  ];
+      const values = [
+        req.body.status.trim(),
+        new Date(),
+        loanId.trim(),
+      ];
 
-  db.query(updateOneQuery, values)
-    .then((resp) => {
-      [loan] = resp.rows;
+      db.query(updateOneQuery, values)
+        .then((respp) => {
+          [loan] = respp.rows;
 
-      return res.status(200).json({
-        status: 200,
-        data: {
-          loanId: loan.id,
-          loanAmount: loan.amount,
-          tenor: loan.tenor,
-          status: loan.status,
-          monthlyInstallment: loan.paymentinstallment,
-          interest: loan.interest,
-          balance: loan.balance,
-        },
+          return res.status(200).json({
+            status: 200,
+            data: {
+              loanId: loan.id,
+              loanAmount: loan.amount,
+              tenor: loan.tenor,
+              status: loan.status,
+              monthlyInstallment: loan.paymentinstallment,
+              interest: loan.interest,
+              balance: loan.balance,
+            },
+          });
+        })
+        .catch((err) => {
+          logger.error({ message: err.message });
+          return res.status(400).json({
+            status: 400,
+            error: 'Failed to update loan.',
+          });
+        });
+    })
+    .catch((err) => {
+      logger.error({ message: err.message });
+      return res.status(400).json({
+        status: 400,
+        error: 'Failed to update loan',
       });
-    }).catch(err => res.status(400).json({
-      status: 400,
-      error: err,
-    }));
+    });
 };
 
 exports.createRepayment = (req, res) => {
   const { loanId } = req.params;
   const error = [];
-  const expectedValue = ['loanId', 'amount'];
+  const expectedValue = ['amount'];
 
   validateRequiredFields(expectedValue, req.body, error);
+  if (error.length > 0) {
+    res.status(422).json({
+      status: 422,
+      error,
+    });
 
+    return;
+  }
+
+  isNumeric(expectedValue, req.body, error);
   if (error.length > 0) {
     res.status(422).json({
       status: 422,
@@ -255,42 +280,50 @@ exports.createRepayment = (req, res) => {
           error: 'record not found',
         });
       }
-    }).catch(err => res.status(400).json({
-      status: 400,
-      error: err,
-    }));
 
-  // create repayment for loan
-  const text = `INSERT INTO
-      repayments(amount, loanId, created_at, updated_at)
-      VALUES($1, $2, $3, $4)
+      // create repayment for loan
+      const text = `INSERT INTO
+      repayments(id, amount, loanId, created_at, updated_at)
+      VALUES($1, $2, $3, $4, $5)
       returning *`;
 
-  const values = [
-    req.body.amount,
-    loanId.trim(),
-    new Date(),
-    new Date(),
-  ];
+      const values = [
+        uuidv4(),
+        req.body.amount,
+        loanId.trim(),
+        new Date(),
+        new Date(),
+      ];
 
-  db.query(text, values)
-    .then((resp) => {
-      const data = resp.rows[0];
+      db.query(text, values)
+        .then((resp) => {
+          const data = resp.rows[0];
 
-      return res.status(201).json({
-        status: 201,
-        data: {
-          loanId: data.loanId,
-          createdOn: data.created_at,
-          amount: loan.amount,
-          monthlyInstallment: loan.paymentinstallment,
-          paidAmount: data.amount,
-          balance: loan.balance,
-        },
-      });
+          return res.status(201).json({
+            status: 201,
+            data: {
+              loanId: data.loanId,
+              createdOn: data.created_at,
+              amount: loan.amount,
+              monthlyInstallment: loan.paymentinstallment,
+              paidAmount: data.amount,
+              balance: loan.balance,
+            },
+          });
+        })
+        .catch((err) => {
+          logger.error({ message: err.message });
+          return res.status(400).json({
+            status: 400,
+            error: 'Failed to post loan repayment.',
+          });
+        });
     })
-    .catch(err => res.status(404).json({
-      status: 404,
-      error: err,
-    }));
+    .catch((err) => {
+      logger.error({ message: err.message });
+      return res.status(400).json({
+        status: 400,
+        error: 'Failed to find loan with provided id.',
+      });
+    });
 };

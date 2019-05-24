@@ -49,7 +49,7 @@ const createRepaymentTable = () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
       repayments(
         id UUID PRIMARY KEY,
-        loanId INT NOT NULL,
+        loanId VARCHAR(128) NOT NULL,
         amount NUMERIC NOT NULL,
         created_at TIMESTAMP,
         updated_at TIMESTAMP

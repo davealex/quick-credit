@@ -23,7 +23,7 @@ exports.signUp = (req, res) => {
   validateRequiredFields(expectedValues, req.body, error);
 
   // extra validation
-  if (!validateEmail(email)) error.push({ email: 'The email address is not valid' });
+  if (!validateEmail(email.trim())) error.push({ email: 'The email address is not valid' });
   if (confirmPassword !== password) error.push({ confirmPassword: 'The password does not match password field' });
 
   if (error.length > 0) {
@@ -34,38 +34,66 @@ exports.signUp = (req, res) => {
     return;
   }
 
-  const text = `INSERT INTO
+  // check if user exits
+  db.query('SELECT * FROM users WHERE email = $1', [req.body.email.trim()])
+    .then((resp) => {
+      const user = resp.rows[0];
+      if (user) {
+        return res.status(400).json({
+          status: 400,
+          error: 'The email is taken.',
+        });
+      }
+
+      // save new user
+      const text = `INSERT INTO
       users(id, email, firstname, lastname, password, address, status, is_admin, created_at, updated_at)
       VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       returning *`;
 
-  const values = [
-    uuidv4(),
-    req.body.email,
-    req.body.firstName,
-    req.body.lastName,
-    hash(req.body.password),
-    req.body.address,
-    'unverified',
-    false,
-    moment(),
-    moment(),
-  ];
+      const role = req.body.email.trim() === 'admin@gmail.com';
 
-  db.query(text, values)
-    .then((resp) => {
-      const data = {
-        token: generateToken(req.body.email),
-        ...resp.rows[0],
-      };
+      const values = [
+        uuidv4(),
+        req.body.email.trim(),
+        req.body.firstName,
+        req.body.lastName,
+        hash(req.body.password.trim()),
+        req.body.address,
+        'unverified',
+        role,
+        moment(),
+        moment(),
+      ];
 
-      delete data.password;
-      return res.status(201).json({
-        status: 201,
-        data,
-      });
+      db.query(text, values)
+        .then((resp) => {
+          const data = {
+            token: generateToken(req.body.email.trim()),
+            ...resp.rows[0],
+          };
+
+          delete data.password;
+          return res.status(201).json({
+            status: 201,
+            data,
+          });
+        })
+        .catch((err) => {
+          logger.error({ message: err.message });
+          return res.status(400).json({
+            status: 400,
+            error: 'Creating a new user failed. Please try again.',
+          });
+        });
     })
-    .catch(err => res.status(400).send(err));
+    .catch((err) => {
+      logger.error({ message: err.message });
+      return res.status(400).json({
+        status: 400,
+        error: 'Authentication failed. Please try again.',
+      });
+    });
 };
 
 /**
@@ -151,40 +179,47 @@ exports.verifyUser = (req, res) => {
       if (!user) {
         return res.status(403).json({
           status: 403,
-          error: 'Invalid email.',
+          error: 'User with id not found.',
         });
       }
-    })
-    .catch(err => res.status(400).json({
-      status: 400,
-      error: err,
-    }));
 
-  // update user status
-  const updateOneQuery = `UPDATE users
+      // update user status
+      const updateOneQuery = `UPDATE users
       SET status=$1, updated_at=$2
       WHERE email=$3 returning *`;
-  const values = [
-    'verified',
-    new Date(),
-    email,
-  ];
+      const values = [
+        'verified',
+        new Date(),
+        email,
+      ];
 
-  db.query(updateOneQuery, values)
-    .then((resp) => {
-      [user] = resp.rows;
+      db.query(updateOneQuery, values)
+        .then((response) => {
+          [user] = response.rows;
 
-      return res.status(200).json({
-        status: 200,
-        data: {
-          email,
-          firstName: user.firstname,
-          lastName: user.lastname,
-          status: user.status,
-        },
+          return res.status(200).json({
+            status: 200,
+            data: {
+              email,
+              firstName: user.firstname,
+              lastName: user.lastname,
+              status: user.status,
+            },
+          });
+        })
+        .catch((err) => {
+          logger.error({ message: err.message });
+          return res.status(400).json({
+            status: 400,
+            error: 'Failed to verify user.',
+          });
+        });
+    })
+    .catch((err) => {
+      logger.error({ message: err.message });
+      return res.status(400).json({
+        status: 400,
+        error: 'Failed to verify user.',
       });
-    }).catch(err => res.status(400).json({
-      status: 400,
-      error: err,
-    }));
+    });
 };
