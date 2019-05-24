@@ -6,7 +6,6 @@ const User = require('../../../controllers/userController');
 const Loan = require('../../../controllers/loanController');
 const isAdmin = require('../../../middlewares/admin');
 const isAuth = require('../../../middlewares/auth');
-const canTakeLoan = require('../../../middlewares/canTakeLoan');
 // const canTakeLoan = require('../../../middlewares/canTakeLoan');
 
 // user signup endpoint
@@ -147,7 +146,7 @@ routerV1.patch('/users/:email/verify', [isAuth, isAdmin], User.verifyUser);
  *       201:
  *         description: loan application
  */
-routerV1.post('/loans', [isAuth, canTakeLoan], Loan.applyForLoan);
+routerV1.post('/loans', [isAuth], Loan.applyForLoan);
 
 // view specific loan
 /**
