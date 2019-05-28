@@ -1,5 +1,6 @@
 const uuidv4 = require('uuid/v4');
 const db = require('./../database/connect');
+const logger = require('../config/winston');
 
 const loans = [
   {
@@ -196,10 +197,10 @@ exports.seedLoans = () => {
 
     db.query(text, values)
       .then((resp) => {
-        const data = resp.rows[0];
+        const [data] = resp.rows;
       })
       .catch((err) => {
-        console.log(err);
+        logger.error({ message: err.message });
       });
   });
 };

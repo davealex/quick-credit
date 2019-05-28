@@ -13,7 +13,6 @@ pool.on('connect', () => {
 
 
 module.exports = {
-
   query(text, params) {
     return new Promise((resolve, reject) => {
       pool.query(text, params)

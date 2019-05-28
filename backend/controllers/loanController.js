@@ -1,6 +1,6 @@
 const uuidv4 = require('uuid/v4');
 const db = require('../database/connect');
-const loans = require('../seeds/loans');
+// const loans = require('../seeds/loans');
 const compute = require('../util/loanComputedValues');
 const logger = require('../config/winston');
 const {
@@ -22,7 +22,7 @@ exports.applyForLoan = (req, res) => {
   }
 
   const { amount, tenor } = req.body;
-  const user = req.user;
+  const { user } = req;
 
   const text = `INSERT INTO
       loans(id, email, repaid, tenor, amount, paymentinstallment, status, balance, interest, created_at, updated_at)
@@ -296,7 +296,7 @@ exports.createRepayment = (req, res) => {
       ];
 
       db.query(text, values)
-        .then((resp) => {
+        .then(() => {
           const data = resp.rows[0];
 
           return res.status(201).json({

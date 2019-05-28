@@ -37,6 +37,7 @@ exports.isAlpha = (fields, requests, error) => {
 function isNumeric(num) {
   return !isNaN(num);
 }
+
 exports.isNumeric = (fields, requests, error) => {
   fields.forEach((value) => {
     if (!isNumeric(requests[value].trim())) {

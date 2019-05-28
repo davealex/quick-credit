@@ -67,7 +67,7 @@ exports.signUp = (req, res) => {
       ];
 
       db.query(text, values)
-        .then((resp) => {
+        .then(() => {
           const data = {
             token: generateToken(req.body.email.trim()),
             ...resp.rows[0],

@@ -11,13 +11,13 @@ chai.use(chaiHttp);
 
 describe('All Loans', () => {
   it('Should get all loans', (done) => {
-    chai.request(app).get('/api/v1/loans')
+    chai.request(app).get('/api/v1/loans').set('is_admin', true)
       .then((res) => {
         expect(res).to.have.status(200);
 
         done();
       })
-      .catch(err => console.log(err));
-    // .catch(err => logger.error({ message: err.message }));
+      // .catch(err => console.log(err));
+      .catch(err => logger.error({ message: err.message }));
   });
 });
