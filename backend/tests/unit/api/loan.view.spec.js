@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4';
 // const { describe } = require('mocha');
 const chai = require('chai');
 const { expect } = require('chai');
@@ -8,7 +9,7 @@ const app = require('../../../src/server');
 chai.use(chaiHttp);
 
 const loan = {
-  id: 21,
+  id: uuidv4(),
   user: 'imogenesykes@ezentia.com',
   createdOn: '2016-02-20T01:41:03',
   status: 'rejected',

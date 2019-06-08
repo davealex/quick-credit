@@ -4,7 +4,7 @@ const logger = require('../config/winston');
 
 const loans = [
   {
-    id: 28,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2014-08-28T11:03:44',
     status: 'approved',
@@ -16,7 +16,7 @@ const loans = [
     interest: '3,487.26',
   },
   {
-    id: 16,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2014-01-30T10:05:35',
     status: 'pending',
@@ -28,7 +28,7 @@ const loans = [
     interest: '2,456.92',
   },
   {
-    id: 28,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2018-05-23T06:44:12',
     status: 'approved',
@@ -40,7 +40,7 @@ const loans = [
     interest: '1,452.60',
   },
   {
-    id: 37,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2017-07-14T09:10:53',
     status: 'rejected',
@@ -52,7 +52,7 @@ const loans = [
     interest: '2,643.80',
   },
   {
-    id: 28,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2016-02-20T01:41:03',
     status: 'rejected',
@@ -64,7 +64,7 @@ const loans = [
     interest: '3,002.22',
   },
   {
-    id: 27,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2015-02-02T02:09:10',
     status: 'rejected',
@@ -76,7 +76,7 @@ const loans = [
     interest: '2,079.94',
   },
   {
-    id: 33,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2018-05-22T04:13:31',
     status: 'approved',
@@ -88,7 +88,7 @@ const loans = [
     interest: '3,537.15',
   },
   {
-    id: 28,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2014-08-28T11:03:44',
     status: 'approved',
@@ -100,7 +100,7 @@ const loans = [
     interest: '3,487.26',
   },
   {
-    id: 16,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2014-01-30T10:05:35',
     status: 'pending',
@@ -112,7 +112,7 @@ const loans = [
     interest: '2,456.92',
   },
   {
-    id: 28,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2018-05-23T06:44:12',
     status: 'approved',
@@ -124,7 +124,7 @@ const loans = [
     interest: '1,452.60',
   },
   {
-    id: 37,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2017-07-14T09:10:53',
     status: 'rejected',
@@ -136,7 +136,7 @@ const loans = [
     interest: '2,643.80',
   },
   {
-    id: 28,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2016-02-20T01:41:03',
     status: 'rejected',
@@ -148,7 +148,7 @@ const loans = [
     interest: '3,002.22',
   },
   {
-    id: 27,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2015-02-02T02:09:10',
     status: 'rejected',
@@ -160,7 +160,7 @@ const loans = [
     interest: '2,079.94',
   },
   {
-    id: 33,
+    id: uuidv4(),
     user: 'imogenesykes@ezentia.com',
     createdOn: '2018-05-22T04:13:31',
     status: 'approved',

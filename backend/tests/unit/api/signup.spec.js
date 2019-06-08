@@ -2,6 +2,7 @@ const { describe } = require('mocha');
 const chai = require('chai');
 const { expect } = require('chai');
 const chaiHttp = require('chai-http');
+const uuidv4 = require('uuid/v4');
 // const { Pool } = require('pg');
 const logger = require('../../../config/winston');
 const app = require('../../../src/server');
@@ -24,6 +25,7 @@ describe('User signup', () => {
   it('Should return 201 and confirmation of valid input', (done) => {
     // mock valid user input
     const newUser = {
+      id: uuidv4(),
       email: 'dave@email.com',
       firstName: 'James',
       lastName: 'Bond',

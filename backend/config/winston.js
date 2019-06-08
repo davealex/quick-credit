@@ -1,6 +1,8 @@
-const { createLogger, format, transports } = require('winston');
+import { createLogger, format, transports } from 'winston';
 
-const { ENV, APP_ROOT } = require('../config/app');
+import appConfig from './app';
+
+const { ENV, APP_ROOT } = appConfig;
 
 // define the custom settings for each transport (file, console)
 const options = {
@@ -32,4 +34,4 @@ const logger = createLogger({
   ],
 });
 
-module.exports = logger;
+export default logger;
