@@ -2,7 +2,7 @@ const { createLogger, format, transports } = require('winston');
 
 const { ENV, APP_ROOT } = require('../config/app');
 
-// define the custom settings for each transport (file, console)
+// define custom settings for each transport (file, console)
 const options = {
   file: {
     level: ENV === 'development' ? 'debug' : 'info',

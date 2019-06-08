@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 const appRoot = require('app-root-path');
 
 dotenv.config();
-// export app configuration object
+// export app configuration object module
 module.exports = {
   APP_NAME: process.env.APP_NAME,
   ENV: process.env.NODE_ENV,
