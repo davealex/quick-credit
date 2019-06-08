@@ -10,7 +10,7 @@ module.exports = {
   HOST: process.env.HOST,
   LOG_LEVEL: process.env.LOG_LEVEL,
   APP_ROOT: appRoot,
-  JWT_KEY: process.env.JWT_KEY || 'yuyuuy65!@3$5^uuih(0*7t',
+  JWT_KEY: process.env.JWT_KEY,
   DB_USER: process.env.DB_USER,
   DB_PASSWORD: process.env.DB_PASSWORD,
   DB_NAME: process.env.DB_NAME,
